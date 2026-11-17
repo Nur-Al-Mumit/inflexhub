@@ -1,0 +1,157 @@
+{
+  "categories": [
+    { "slug": "business-management", "name": "Business Management" },
+    { "slug": "sales-commerce", "name": "Sales & Commerce" },
+    { "slug": "finance-hr", "name": "Finance & HR" },
+    { "slug": "education", "name": "Education" },
+    { "slug": "healthcare", "name": "Healthcare" }
+  ],
+  "industries": [
+    { "slug": "retail", "name": "Retail & Wholesale" },
+    { "slug": "manufacturing", "name": "Manufacturing" },
+    { "slug": "education", "name": "Education" },
+    { "slug": "healthcare", "name": "Healthcare" },
+    { "slug": "hospitality", "name": "Hospitality & Restaurants" },
+    { "slug": "real-estate", "name": "Real Estate" },
+    { "slug": "logistics", "name": "Logistics & Distribution" },
+    { "slug": "professional-services", "name": "Professional Services" },
+    { "slug": "ngo", "name": "NGOs & Non-profits" }
+  ],
+  "products": [
+    {
+      "slug": "erp",
+      "name": "InflexHub ERP",
+      "tagline": "Enterprise resource planning for manufacturing, retail, and logistics operations",
+      "category": "business-management",
+      "industries": ["manufacturing", "retail", "logistics"],
+      "availability": "custom",
+      "brochure": null
+    },
+    {
+      "slug": "pos",
+      "name": "InflexHub POS",
+      "tagline": "Point-of-sale system for retail and hospitality businesses",
+      "category": "sales-commerce",
+      "industries": ["retail", "hospitality"],
+      "availability": "available",
+      "brochure": null
+    },
+    {
+      "slug": "inventory",
+      "name": "Inventory Management",
+      "tagline": "Inventory tracking and stock management for business operations",
+      "category": "business-management",
+      "industries": ["retail", "manufacturing", "logistics"],
+      "availability": "available",
+      "brochure": null
+    },
+    {
+      "slug": "accounting",
+      "name": "Accounting Software",
+      "tagline": "Accounting and bookkeeping for small and medium businesses",
+      "category": "finance-hr",
+      "industries": ["retail", "professional-services", "ngo"],
+      "availability": "available",
+      "brochure": null
+    },
+    {
+      "slug": "hrm-payroll",
+      "name": "HRM & Payroll",
+      "tagline": "Human resource management and payroll for teams and organisations",
+      "category": "finance-hr",
+      "industries": ["manufacturing", "professional-services", "ngo"],
+      "availability": "available",
+      "brochure": null
+    },
+    {
+      "slug": "crm",
+      "name": "CRM System",
+      "tagline": "Customer relationship management for sales-driven teams",
+      "category": "sales-commerce",
+      "industries": ["professional-services", "real-estate", "retail"],
+      "availability": "custom",
+      "brochure": null
+    },
+    {
+      "slug": "ecommerce",
+      "name": "E-commerce Solution",
+      "tagline": "E-commerce platform for online retail businesses",
+      "category": "sales-commerce",
+      "industries": ["retail"],
+      "availability": "custom",
+      "brochure": null
+    },
+    {
+      "slug": "school-management",
+      "name": "School Management System",
+      "tagline": "Management system for schools",
+      "category": "education",
+      "industries": ["education"],
+      "availability": "available",
+      "brochure": null
+    },
+    {
+      "slug": "college-university",
+      "name": "College & University Management",
+      "tagline": "Management system for colleges and universities",
+      "category": "education",
+      "industries": ["education"],
+      "availability": "custom",
+      "brochure": null
+    },
+    {
+      "slug": "lms",
+      "name": "Learning Management System",
+      "tagline": "Learning management for education and training",
+      "category": "education",
+      "industries": ["education", "professional-services"],
+      "availability": "upcoming",
+      "brochure": null
+    },
+    {
+      "slug": "hospital-management",
+      "name": "Hospital Management System",
+      "tagline": "Management system for hospitals and clinics",
+      "category": "healthcare",
+      "industries": ["healthcare"],
+      "availability": "custom",
+      "brochure": null
+    },
+    {
+      "slug": "pharmacy-management",
+      "name": "Pharmacy Management",
+      "tagline": "Management system for pharmacies",
+      "category": "healthcare",
+      "industries": ["healthcare", "retail"],
+      "availability": "upcoming",
+      "brochure": null
+    },
+    {
+      "slug": "diagnostic-lab",
+      "name": "Diagnostic & Lab Management",
+      "tagline": "Management system for diagnostic centres and laboratories",
+      "category": "healthcare",
+      "industries": ["healthcare"],
+      "availability": "upcoming",
+      "brochure": null
+    },
+    {
+      "slug": "restaurant-management",
+      "name": "Restaurant Management",
+      "tagline": "Management system for restaurants and food service",
+      "category": "sales-commerce",
+      "industries": ["hospitality"],
+      "availability": "upcoming",
+      "brochure": null
+    },
+    {
+      "slug": "property-management",
+      "name": "Real Estate & Property Management",
+      "tagline": "Management system for real estate and property businesses",
+      "category": "business-management",
+      "industries": ["real-estate"],
+      "availability": "upcoming",
+      "brochure": null
+    }
+  ]
+}

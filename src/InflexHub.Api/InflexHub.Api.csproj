@@ -1,18 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.15" />
+    <PackageReference Include="AspNetCore.HealthChecks.Npgsql" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" PrivateAssets="all" />
+    <PackageReference Include="Serilog.AspNetCore" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\InflexHub.Application\InflexHub.Application.csproj" />
     <ProjectReference Include="..\InflexHub.Infrastructure\InflexHub.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <!-- The shared static catalog (ADR 0002): copied next to the binary so JsonCatalog
+       can read it via Catalog__Path (default catalog/products.json). -->
+  <ItemGroup>
+    <Content Include="..\..\catalog\products.json" Link="catalog\products.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

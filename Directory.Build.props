@@ -1,0 +1,18 @@
+<Project>
+
+  <!-- Shared build settings for every project in the solution (M0-1). -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+
+  <!-- Warnings as errors in CI only (scope/m0: local builds stay warning-tolerant;
+       "Verify all" and CI pass -warnaserror explicitly via TreatWarningsAsErrors). -->
+  <PropertyGroup Condition="'$(CI)' == 'true'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+</Project>

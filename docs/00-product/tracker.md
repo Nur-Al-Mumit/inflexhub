@@ -16,7 +16,7 @@ Purpose: What is done and what is not, per version.
 | Version | Rows | Done | State |
 |---|---|---|---|
 | Docs | 1 | 0 | review |
-| M0 | 8 | 0 | todo |
+| M0 | 8 | 8 | done (2026-11-17; docker compose verified) |
 | V1 | 34 | 0 | todo |
 | V1.1 | 9 | 0 | blocked (keys, domain, SMTP) |
 | V2 | — | — | planned |
@@ -31,14 +31,18 @@ Purpose: What is done and what is not, per version.
 
 | ID | Item | Status | Tests |
 |---|---|---|---|
-| M0-1 | Solution, projects, references, `Directory.Build.props`, `Directory.Packages.props` | todo | — |
-| M0-2 | Mediator + validation pipeline, ProblemDetails + error slugs, Serilog | todo | — |
-| M0-3 | `AppDbContext`, snake_case, first migration | todo | — |
-| M0-4 | Health endpoints | todo | — |
-| M0-5 | `catalog/products.json` | todo | — |
-| M0-6 | `web/` workspace + Next.js 16 site, tokens, fonts, layout shell; `web/apps/site/AGENTS.md` with frontend rules | todo | — |
-| M0-7 | Docker compose, Dockerfiles, `.env.example` | todo | — |
-| M0-8 | CI workflow | todo | — |
+| M0-1 | Solution, projects, references, `Directory.Build.props`, `Directory.Packages.props` | done | — |
+| M0-2 | Mediator + validation pipeline, ProblemDetails + error slugs, Serilog | done | `ValidationCommandBehaviorTests` (4), `ValidationQueryBehaviorTests` (2) |
+| M0-3 | `AppDbContext`, snake_case, first migration | done | — |
+| M0-4 | Health endpoints | done | — |
+| M0-5 | `catalog/products.json` | done | — |
+| M0-6 | `web/` workspace + Next.js 16 site, tokens, fonts, layout shell; `web/apps/site/AGENTS.md` with frontend rules | done | `tokens.test.ts` (2) |
+| M0-7 | Docker compose, Dockerfiles, `.env.example` | done | — |
+| M0-8 | CI workflow | done | — |
+
+M0 notes (2026-11-17): M0-2 uses Cortex.Mediator open pipeline behaviors with our own FluentValidation `ValidationCommandBehavior`/`ValidationQueryBehavior` (the package has no built-in validation behavior); ProblemDetails handler maps `validation-failed` (400) and `internal-error` (500); domain slugs arrive with V1. M0-3 migration is an intentionally empty baseline (`InitialCreate`) proving the Npgsql + snake_case + bundle toolchain; the `Inquiries` migration is V1-18; SQL script at `docs/03-database/sql/0001_initial_create.sql`; `dotnet-ef` 10.0.15 pinned as a local tool. M0-6 site on Next 16.4.6 / React 19.3.0; header/footer are the structural shell (mega menu, drawer, products-by-category footer column are V1-2); contact/legal details are OV-3/OV-18 placeholders in `src/content/company.ts`; 360 px + 1280 px + tab-order check done. M0-7 base images pinned (`sdk:10.0.404`, `aspnet:10.0.4`, `postgres:18.7`, `node:26.13.1-alpine3.24`); `docker compose up --build` verified 2026-11-17 (db healthy → migrate exit 0, `InitialCreate` applied → api → site on :3000, `/health/live` and `/health/ready` both 200). Fixes found during bring-up: the pgdata volume mounts at `/var/lib/postgresql` (postgres 18 rejects the legacy `/data` mount); the migrator stage restores `dotnet-ef` from the local tool manifest and gets `ConnectionStrings__Default` as env (the bundle re-hosts the app); `AddInflexHubInfrastructure` tolerates a missing connection string at registration so EF tooling and the bundle can build the host (an unconfigured API fails `/health/ready` instead of not starting). M0-8 runs backend (restore/build `-warnaserror`/test) and frontend (npm ci/typecheck/test/build) on .NET 10 + Node 26.
+
+M0 review fixes (2026-11-17, same branch): logo wordmark is "Infle" (navy) + a drawn letter x on the text baseline — navy stroke TL→BR, orange stroke BL→TR rising into an amber arrowhead (em-sized, `role="img"` accessible name "InflexHub"); site Dockerfile mirrors the repo layout at `/repo` (web/, catalog/) with `outputFileTracingRoot`/`turbopack.root` anchored at the repo root, so `../../../catalog/products.json` resolves identically locally and in the image and the standalone output is `web/apps/site/server.js`; `lucide-react` lives only in `apps/site` (workspace root has no dependencies); bare 404s from unmatched routes return ProblemDetails slug `not-found`, and all ProblemDetails + logs share the traceId from `Activity.Current?.Id ?? HttpContext.TraceIdentifier`.
 
 ## V1 — Launch
 

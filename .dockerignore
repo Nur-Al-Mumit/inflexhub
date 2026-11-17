@@ -1,0 +1,15 @@
+# Keep Docker build contexts clean (M0-7). Context is the repository root.
+.git
+.github
+**/bin
+**/obj
+**/node_modules
+**/.next
+**/TestResults
+pgdata
+.env
+.env.*
+*.md
+docs
+tmp
+.DS_Store

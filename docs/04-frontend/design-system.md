@@ -17,7 +17,7 @@ Purpose: Principles, tokens, components, and patterns for the public site (V1) a
 
 ## 2. Brand
 
-From the supplied logo: **"Infle" navy**, **"Hub" orange**, **amber arrow** rising out of the x. Tagline in the supplied file is not used (OV-6). The wordmark is rebuilt as an HTML + SVG component (`<Logo />`) so it is crisp at every size and has a light-on-dark variant.
+From the supplied logo, the wordmark reads **"InflexHub"**: **"Infle" in navy**, then the letter **"x" drawn as two strokes** (a navy stroke from top-left to bottom-right, crossed by an orange stroke from bottom-left to top-right that continues past the letter into the **amber arrowhead** pointing up-right), then **"Hub" in orange**. The x is part of the word, never omitted, and the arrow is the x's rising stroke, never a separate icon after the word. Tagline in the supplied file is not used (OV-6). The wordmark is rebuilt as an HTML + SVG component (`<Logo />`) so it is crisp at every size and has a light-on-dark variant.
 
 ## 3. Colour tokens
 

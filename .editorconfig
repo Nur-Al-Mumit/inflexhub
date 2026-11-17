@@ -1,0 +1,25 @@
+# Editor configuration for the InflexHub repository (M0-1).
+# Style rules are editor guidance; build enforcement lives in Directory.Build.props.
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.cs]
+indent_style = space
+indent_size = 4
+
+[*.{json,yml,yaml}]
+indent_style = space
+indent_size = 2
+
+[*.{ts,tsx,js,jsx,css,md}]
+indent_style = space
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
