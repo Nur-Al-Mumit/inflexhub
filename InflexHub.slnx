@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/InflexHub.Api/InflexHub.Api.csproj" />
+    <Project Path="src/InflexHub.Application/InflexHub.Application.csproj" />
+    <Project Path="src/InflexHub.Domain/InflexHub.Domain.csproj" />
+    <Project Path="src/InflexHub.Infrastructure/InflexHub.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/InflexHub.Application.UnitTests/InflexHub.Application.UnitTests.csproj" />
+  </Folder>
+</Solution>
