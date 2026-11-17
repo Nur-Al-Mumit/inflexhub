@@ -18,12 +18,15 @@ export type CtaBandProps = {
 };
 
 export function CtaBand({ eyebrow, title, intro, cta }: CtaBandProps) {
+  const titleId = `cta-${title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`;
   return (
-    <section className={styles.band}>
+    <section className={styles.band} aria-labelledby={titleId}>
       <Container className={styles.inner}>
         <div className={styles.copy}>
           {eyebrow ? <p className={styles.eyebrow}>{eyebrow}</p> : null}
-          <h2 className={styles.title}>{title}</h2>
+          <h2 id={titleId} className={styles.title}>
+            {title}
+          </h2>
           {intro ? <p className={styles.intro}>{intro}</p> : null}
         </div>
         <ButtonLink href={cta.href} size="lg" arrow className={styles.cta}>

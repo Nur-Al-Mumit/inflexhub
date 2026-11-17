@@ -12,7 +12,8 @@ export type ButtonLinkVariant =
   | "secondary"
   | "outline"
   | "ghost"
-  | "onDarkGhost";
+  | "onDarkGhost"
+  | "onDarkOutline";
 
 export type ButtonLinkSize = "md" | "lg";
 

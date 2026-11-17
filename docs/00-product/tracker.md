@@ -17,7 +17,7 @@ Purpose: What is done and what is not, per version.
 |---|---|---|---|
 | Docs | 1 | 0 | review |
 | M0 | 8 | 8 | done (2026-11-17; docker compose verified) |
-| V1 | 34 | 2 | in progress (V1-1, V1-2 done) |
+| V1 | 34 | 3 | in progress (V1-1, V1-2, V1-3 done) |
 | V1.1 | 9 | 0 | blocked (keys, domain, SMTP) |
 | V2 | — | — | planned |
 
@@ -50,7 +50,9 @@ M0 review fixes (2026-11-17, same branch): logo wordmark is "Infle" (navy) + a d
 |---|---|---|---|---|
 | V1-1 | UI components (§7 design system) | — | done | @ui + `catalog.test.ts` (4), `aria.test.ts` (4) |
 | V1-2 | Header with mega menu, mobile drawer, footer | US-1 | done | @ui |
-| V1-3 | Home page | US-1 | todo | @ui |
+| V1-3 | Home page | US-1 | done | @ui + `catalog.test.ts` stats (2) |
+
+V1-3 notes (2026-11-17, branch `feature/V1-3-home`): all sections per the pages-and-flows "/" row — hero (both CTAs above the fold, SVG-only brand visual with the rising-arrow motif), catalog stats strip (`getCatalogStats`, catalog-only numbers: 15/5/9 and 5/5/5), products-by-category tabs (`ProductTabs`, APG pattern: roving tabindex, arrows + Home/End), availability explainer (PRD §1.3 states with matching actions), industries grid with factual product counts (`getIndustrySummaries`), why InflexHub, 4-step process, engagement models, FAQ (Accordion), CtaBand. Copy in `src/content/home.ts` (OV-2, modest; no invented numbers per OV-4). New `ProductCard` in `components/products/` (whole card = one link). Section reveal is CSS-only scroll-driven animation behind `@supports (animation-timeline: view())` + `prefers-reduced-motion: no-preference`; fully visible otherwise. Unique page title/description. Server Components except the tabs. Verified: stats match catalog (tests), tabs keyboard (focus+selection move, panel swaps), no horizontal scroll at 360/768/1280, CTAs above the fold at 1280.
 | V1-4 | Products list + filters | US-2 | todo | `filters.test.ts` |
 | V1-5 | Product detail + content for 15 products | US-3 | todo | `catalog.test.ts` |
 | V1-6 | Industries list + detail | US-4 | todo | @ui |

@@ -7,7 +7,9 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   getCatalog,
+  getCatalogStats,
   getCategoryGroups,
+  getIndustrySummaries,
   getProductsByAvailability,
 } from "../src/lib/catalog.ts";
 
@@ -73,4 +75,41 @@ test("getProductsByAvailability_filters_and_getCatalog_is_cached", () => {
 
   // Same object identity: the file is read once.
   assert.equal(getCatalog(), getCatalog());
+});
+
+test("getCatalogStats_counts_match_the_catalog", () => {
+  const catalog = getCatalog();
+  const stats = getCatalogStats();
+
+  assert.equal(stats.products, catalog.products.length);
+  assert.equal(stats.categories, catalog.categories.length);
+  assert.equal(stats.industries, catalog.industries.length);
+  assert.equal(
+    stats.available + stats.custom + stats.upcoming,
+    catalog.products.length,
+    "availability counts must add up to every product",
+  );
+  for (const availability of ["available", "custom", "upcoming"] as const) {
+    const expected = catalog.products.filter(
+      (p) => p.availability === availability,
+    ).length;
+    assert.equal(stats[availability], expected, availability);
+  }
+});
+
+test("getIndustrySummaries_counts_products_per_industry", () => {
+  const catalog = getCatalog();
+  const summaries = getIndustrySummaries();
+
+  assert.equal(summaries.length, catalog.industries.length);
+  for (const summary of summaries) {
+    const expected = catalog.products.filter((p) =>
+      p.industries.includes(summary.slug),
+    ).length;
+    assert.equal(summary.productCount, expected, summary.slug);
+    assert.ok(
+      summary.productCount > 0,
+      `industry ${summary.slug} has no products in the catalog`,
+    );
+  }
 });

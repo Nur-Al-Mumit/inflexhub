@@ -53,3 +53,30 @@
   line-height: var(--font-body-line-height);
   color: var(--text);
 }
+
+/* ---------- motion: smooth open/close where supported ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .item {
+    interpolate-size: allow-keywords;
+    transition:
+      border-color var(--dur-fast) var(--ease),
+      box-shadow var(--dur-fast) var(--ease);
+  }
+
+  .item[open] {
+    border-color: color-mix(in srgb, var(--orange-500) 35%, var(--line));
+    box-shadow: var(--shadow-1);
+  }
+
+  .item::details-content {
+    block-size: 0;
+    overflow: hidden;
+    transition:
+      block-size var(--dur-med) var(--ease),
+      content-visibility var(--dur-med) allow-discrete;
+  }
+
+  .item[open]::details-content {
+    block-size: auto;
+  }
+}

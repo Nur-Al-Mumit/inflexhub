@@ -1,0 +1,133 @@
+/* Section (design-system §7): one rhythm for every page section. */
+
+.section {
+  padding-block: var(--section-padding);
+}
+
+.default {
+  background-color: var(--surface);
+}
+
+.alt {
+  background-color: var(--surface-alt);
+}
+
+.dark {
+  background-color: var(--navy-950);
+  background-image:
+    radial-gradient(
+      60% 80% at 100% 0%,
+      color-mix(in srgb, var(--indigo-600) 30%, transparent),
+      transparent 70%
+    ),
+    linear-gradient(180deg, var(--navy-950), var(--navy-900));
+  color: var(--on-dark-muted);
+}
+
+/* Header row: copy left, action right (stacks on small screens). */
+.headerRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-5) var(--space-8);
+  margin-bottom: var(--space-9);
+}
+
+.headerCopy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 640px;
+}
+
+.eyebrow {
+  font-size: var(--font-overline-size);
+  line-height: var(--font-overline-line-height);
+  letter-spacing: var(--font-overline-letter-spacing);
+  font-weight: var(--font-overline-weight);
+  text-transform: uppercase;
+  color: var(--orange-700);
+}
+
+.title {
+  font-size: var(--font-h2-size);
+  line-height: var(--font-h2-line-height);
+  letter-spacing: var(--font-h2-letter-spacing);
+  font-weight: var(--font-h2-weight);
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.intro {
+  font-size: var(--font-body-lg-size);
+  line-height: var(--font-body-lg-line-height);
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+.dark .eyebrow {
+  color: var(--orange-500);
+}
+
+.dark .title {
+  color: var(--on-dark);
+}
+
+.dark .intro {
+  color: var(--on-dark-muted);
+}
+
+.action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--touch-target-min);
+  font-weight: 700;
+  color: var(--indigo-600);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.action svg {
+  transition: transform var(--dur-fast) var(--ease);
+}
+
+.action:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.action:hover svg {
+  transform: translateX(3px);
+}
+
+.dark .action {
+  color: var(--on-dark);
+}
+
+/* Split: header column left, content right. */
+.split {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.splitHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-6);
+}
+
+@media (min-width: 900px) {
+  .split {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--space-11);
+    align-items: start;
+  }
+
+  .splitHeader {
+    position: sticky;
+    top: calc(var(--space-12) + var(--space-4));
+  }
+}

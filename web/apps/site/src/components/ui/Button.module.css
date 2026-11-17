@@ -137,3 +137,23 @@
     transform: rotate(360deg);
   }
 }
+
+/* ---------- motion: press feedback and a soft lift on primary ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .button {
+    transition:
+      background-color var(--dur-fast) var(--ease),
+      border-color var(--dur-fast) var(--ease),
+      color var(--dur-fast) var(--ease),
+      box-shadow var(--dur-fast) var(--ease),
+      transform var(--dur-fast) var(--ease);
+  }
+
+  .primary:hover:not(:disabled) {
+    box-shadow: 0 8px 20px color-mix(in srgb, var(--orange-500) 35%, transparent);
+  }
+
+  .button:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+}

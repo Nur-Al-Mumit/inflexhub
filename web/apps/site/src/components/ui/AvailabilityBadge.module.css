@@ -1,6 +1,8 @@
 /* AvailabilityBadge (V1-1): semantic pairs from design-system §3. */
 
 .badge {
+  white-space: nowrap;
+  flex-shrink: 0;
   display: inline-flex;
   align-items: center;
   gap: var(--space-1);

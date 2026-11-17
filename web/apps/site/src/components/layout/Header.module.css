@@ -209,3 +209,31 @@
     margin-inline-start: auto;
   }
 }
+
+/* ---------- motion: mega menu opens with a short fade + drop ---------- */
+@keyframes header-menu-in {
+  from {
+    opacity: 0;
+    translate: 0 -8px;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .menuPanel {
+    animation: header-menu-in var(--dur-med) var(--ease) both;
+  }
+
+  .menuGroup {
+    animation: fade-in var(--dur-med) var(--ease) both;
+  }
+
+  .menuGroup:nth-child(2) { animation-delay: 30ms; }
+  .menuGroup:nth-child(3) { animation-delay: 60ms; }
+  .menuGroup:nth-child(4) { animation-delay: 90ms; }
+  .menuGroup:nth-child(5) { animation-delay: 120ms; }
+}

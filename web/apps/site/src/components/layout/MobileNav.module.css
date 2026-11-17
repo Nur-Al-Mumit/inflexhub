@@ -150,3 +150,40 @@
 .groupLink:hover {
   background-color: var(--surface-tint);
 }
+
+/* ---------- motion: drawer slides in over a fading backdrop ---------- */
+@keyframes drawer-in {
+  from {
+    translate: -100% 0;
+  }
+
+  to {
+    translate: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .overlay {
+    animation: fade-in var(--dur-med) var(--ease) both;
+  }
+
+  .panel {
+    animation: drawer-in var(--dur-med) var(--ease) both;
+  }
+
+  .products {
+    interpolate-size: allow-keywords;
+  }
+
+  .products::details-content {
+    block-size: 0;
+    overflow: hidden;
+    transition:
+      block-size var(--dur-med) var(--ease),
+      content-visibility var(--dur-med) allow-discrete;
+  }
+
+  .products[open]::details-content {
+    block-size: auto;
+  }
+}

@@ -67,6 +67,17 @@
   background-color: var(--navy-700);
 }
 
+.onDarkOutline {
+  background-color: transparent;
+  border-color: color-mix(in srgb, var(--on-dark) 35%, transparent);
+  color: var(--on-dark);
+}
+
+.onDarkOutline:hover {
+  background-color: color-mix(in srgb, var(--on-dark) 10%, transparent);
+  border-color: var(--on-dark);
+}
+
 .md {
   min-height: var(--touch-target-min);
   padding: var(--space-2) var(--space-5);
@@ -92,4 +103,24 @@
 .button:hover .arrow,
 .button:focus-visible .arrow {
   transform: translateX(2px);
+}
+
+/* ---------- motion: press feedback and a soft lift on primary ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .button {
+    transition:
+      background-color var(--dur-fast) var(--ease),
+      border-color var(--dur-fast) var(--ease),
+      color var(--dur-fast) var(--ease),
+      box-shadow var(--dur-fast) var(--ease),
+      transform var(--dur-fast) var(--ease);
+  }
+
+  .primary:hover {
+    box-shadow: 0 8px 20px color-mix(in srgb, var(--orange-500) 35%, transparent);
+  }
+
+  .button:active {
+    transform: translateY(1px);
+  }
 }

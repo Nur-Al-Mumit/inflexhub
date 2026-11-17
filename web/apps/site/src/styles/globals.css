@@ -79,3 +79,64 @@ svg {
     scroll-behavior: auto !important;
   }
 }
+
+/* Visually hidden but read by screen readers. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- Motion (design-system §6 motion catalogue) ----------
+   Everything below only runs when the visitor has not asked for reduced
+   motion. Content is fully visible without any of it. */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(var(--rise, 16px));
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Load-time entrance, staggered by --i. */
+  .enter {
+    animation: fade-up var(--dur-slow) var(--ease) both;
+    animation-delay: calc(var(--i, 0) * 90ms + 80ms);
+  }
+
+  /* Scroll reveal: progressive enhancement where view timelines exist. */
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: fade-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+
+    .revealItem {
+      animation: fade-up linear both;
+      animation-timeline: view();
+      animation-range:
+        entry calc(var(--i, 0) * 6%)
+        entry calc(60% + var(--i, 0) * 6%);
+    }
+  }
+}

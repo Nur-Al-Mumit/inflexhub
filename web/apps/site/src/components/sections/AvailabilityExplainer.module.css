@@ -1,0 +1,100 @@
+/* AvailabilityExplainer (V1-3). */
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.card {
+  --tone-text: var(--success-text);
+  --tone-surface: var(--success-surface);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-7);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--tone-text);
+  border-radius: var(--radius-lg);
+  background-color: var(--surface);
+  box-shadow: var(--shadow-1);
+}
+
+.available {
+  --tone-text: var(--success-text);
+  --tone-surface: var(--success-surface);
+}
+
+.custom {
+  --tone-text: var(--info-text);
+  --tone-surface: var(--info-surface);
+}
+
+.upcoming {
+  --tone-text: var(--upcoming-text);
+  --tone-surface: var(--upcoming-surface);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background-color: var(--tone-surface);
+  color: var(--tone-text);
+}
+
+.count {
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  background-color: var(--tone-surface);
+  font-size: var(--font-small-size);
+  font-weight: 700;
+  color: var(--tone-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.title {
+  font-size: var(--font-h3-size);
+  line-height: var(--font-h3-line-height);
+  font-weight: var(--font-h3-weight);
+  color: var(--ink);
+}
+
+.text {
+  color: var(--muted);
+}
+
+/* Primary button on the first row, secondary link on a reserved second row,
+   so primary buttons line up across cards even when a card has no
+   secondary action. */
+.actions {
+  display: grid;
+  grid-template-rows: auto var(--touch-target-min);
+  justify-items: start;
+  gap: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-5);
+}
+
+.actions > a:nth-child(2) {
+  margin-left: calc(-1 * var(--space-5));
+}

@@ -100,11 +100,27 @@ Line length ≤ 68ch for paragraphs.
 
 `prefers-reduced-motion: reduce` removes all transitions and reveals.
 
+### Motion catalogue (V1)
+
+Principles: motion explains structure (what appeared, what changed, where to look next); it is quick, subtle (≤ 24 px travel, no bounce), never blocks reading or input, and never hides content from visitors without animation support. CSS only (keyframes, transitions, scroll-driven animations as progressive enhancement); the one exception is the stats count-up, a tiny client component. No animation library.
+
+| Pattern | Where | Behaviour |
+|---|---|---|
+| Entrance stagger | Hero copy and visual on load | Fade + 16 px rise, `--dur-slow`, 90 ms between items |
+| Visual build | Hero product window | Chart bars grow from the baseline in sequence, the trend line draws itself, floating cards fade in then drift ±8 px slowly (6 s loop), arrow rises in; background glow drifts very slowly (20 s) |
+| Count-up | Stats card | Numbers count from 0 to the real value over 1.2 s (ease-out) once visible; screen readers always get the final value |
+| Scroll reveal | Section headers and cards | Fade + rise as they enter the viewport, cards staggered by index; only where `animation-timeline: view()` is supported, otherwise content is simply visible |
+| Timeline draw | Process connectors | Lines draw left → right (top → bottom on phones) as the section scrolls in |
+| Tab change | Products by category | New cards fade + rise, staggered |
+| Overlay open | Mega menu, mobile drawer | Menu fades + drops 8 px; drawer slides in from the left over a fading backdrop |
+| Disclosure | FAQ accordion, drawer products group | Height animates open and closed where supported |
+| Micro-interactions | Buttons, cards, links | Cards lift 2 px with a stronger shadow, arrows nudge 3 px, buttons press 1 px on click |
+
 ## 7. Components (V1)
 
 | Component | Variants | States / a11y |
 |---|---|---|
-| Button / ButtonLink | primary (orange, navy text), secondary (navy), outline, ghost, on-dark ghost; sizes md, lg; optional trailing arrow | hover lifts arrow 2 px; focus ring; disabled; loading keeps width and announces |
+| Button / ButtonLink | primary (orange, navy text), secondary (navy), outline, ghost, on-dark ghost, on-dark outline (white text, translucent white border, for secondary actions on navy); sizes md, lg; optional trailing arrow | hover lifts arrow 2 px; focus ring; disabled; loading keeps width and announces |
 | Logo | default, on-dark; with or without wordmark | `aria-label="InflexHub home"` |
 | Header | sticky, transparent-on-hero → solid on scroll; products mega menu; mobile drawer | Skip link; menu opens on click, Escape closes, focus returns |
 | Footer | sitemap columns, contact, legal | `contentinfo` landmark |
@@ -119,6 +135,9 @@ Line length ≤ 68ch for paragraphs.
 | Accordion (FAQ) | — | native `<details>`/`<summary>` |
 | Steps / process | numbered, connected line | ordered list |
 | CTA band | dark navy with orange accent | — |
+| Section | default (white), alt (`surface-alt`), dark (navy); header row: eyebrow + h2 + intro on the left, optional action link on the right; `split` layout puts the header in a left column and content on the right | `aria-labelledby` its h2; one consistent alignment and spacing for every page section |
+| Product card | icon tile, availability badge (never wraps), name (stretched link), tagline, "View product" cue | whole card clickable through one link |
+| Stats card | elevated white card, 2 × 2 on phones, 4 columns from 900 px; factual catalog counts only | each value and label read together |
 | Breadcrumbs | — | `nav aria-label="Breadcrumb"`, `aria-current` |
 | Thank-you panel | with reference, next steps | focus moved to its heading |
 

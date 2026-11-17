@@ -102,3 +102,43 @@ export function getProductsByAvailability(
     (product) => product.availability === availability,
   );
 }
+
+/** Factual counts for the home stats strip — computed from the catalog only. */
+export type CatalogStats = {
+  readonly products: number;
+  readonly categories: number;
+  readonly industries: number;
+  readonly available: number;
+  readonly custom: number;
+  readonly upcoming: number;
+};
+
+export function getCatalogStats(): CatalogStats {
+  const { categories, industries, products } = getCatalog();
+  const count = (availability: ProductAvailability) =>
+    products.filter((product) => product.availability === availability).length;
+
+  return {
+    products: products.length,
+    categories: categories.length,
+    industries: industries.length,
+    available: count("available"),
+    custom: count("custom"),
+    upcoming: count("upcoming"),
+  };
+}
+
+/** Industries with the number of catalog products that serve them. */
+export type IndustrySummary = CatalogIndustry & {
+  readonly productCount: number;
+};
+
+export function getIndustrySummaries(): readonly IndustrySummary[] {
+  const { industries, products } = getCatalog();
+  return industries.map((industry) => ({
+    ...industry,
+    productCount: products.filter((product) =>
+      product.industries.includes(industry.slug),
+    ).length,
+  }));
+}
