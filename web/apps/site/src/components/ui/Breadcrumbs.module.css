@@ -1,0 +1,41 @@
+/* Breadcrumbs (V1-1). */
+
+.nav {
+  font-size: var(--font-small-size);
+  line-height: var(--font-small-line-height);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.item + .item::before {
+  content: "/";
+  color: var(--muted);
+}
+
+.link {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.link:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}
+
+.current {
+  color: var(--ink);
+  font-weight: 500;
+}

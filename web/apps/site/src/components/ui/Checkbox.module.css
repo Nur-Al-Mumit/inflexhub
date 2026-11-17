@@ -1,0 +1,38 @@
+/* Checkbox (V1-1). */
+
+.checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  min-height: var(--touch-target-min);
+  cursor: pointer;
+}
+
+.input {
+  width: 18px;
+  height: 18px;
+  margin: var(--space-1) 0 0;
+  flex: none;
+  accent-color: var(--orange-500);
+  cursor: inherit;
+}
+
+.input:disabled {
+  cursor: not-allowed;
+}
+
+.labelText {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
+  color: var(--text);
+}
+
+.checkbox:hover .input:not(:disabled) {
+  outline: 1px solid var(--border-input);
+  border-radius: var(--radius-sm);
+}
+
+.invalid {
+  outline: 2px solid var(--danger-text);
+  border-radius: var(--radius-sm);
+}

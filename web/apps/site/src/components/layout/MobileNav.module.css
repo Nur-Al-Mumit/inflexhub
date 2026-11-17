@@ -1,0 +1,152 @@
+/* MobileNav (V1-2): drawer below 900 px. */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background-color: rgb(8 12 38 / 0.5);
+}
+
+.panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: min(88vw, 360px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-5) var(--space-6) var(--space-8);
+  background-color: var(--surface);
+  border-right: 1px solid var(--line);
+  box-shadow: var(--shadow-3);
+  overflow-y: auto;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.cta {
+  flex: none;
+}
+
+.close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--touch-target-min);
+  height: var(--touch-target-min);
+  border: 1px solid var(--border-input);
+  border-radius: var(--radius-md);
+  background-color: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.close:hover {
+  background-color: var(--surface-tint);
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  min-height: var(--touch-target-min);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  font-size: var(--font-h4-size);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.link:hover {
+  background-color: var(--surface-tint);
+}
+
+/* Products group: native details/summary. */
+.products {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background-color: var(--surface);
+}
+
+.productsSummary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: var(--touch-target-min);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  color: var(--ink);
+  font-size: var(--font-h4-size);
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+.productsSummary::-webkit-details-marker {
+  display: none;
+}
+
+.productsSummary:hover {
+  background-color: var(--surface-alt);
+}
+
+.chevron {
+  flex: none;
+  color: var(--muted);
+  transition: transform var(--dur-med) var(--ease);
+}
+
+.products[open] .chevron {
+  transform: rotate(180deg);
+}
+
+.productsContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-3) var(--space-3);
+  border-top: 1px solid var(--line);
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding-block-start: var(--space-2);
+}
+
+.groupTitle {
+  font-size: var(--font-overline-size);
+  line-height: var(--font-overline-line-height);
+  letter-spacing: var(--font-overline-letter-spacing);
+  text-transform: uppercase;
+  font-weight: var(--font-overline-weight);
+  color: var(--orange-700);
+}
+
+.groupLink {
+  display: flex;
+  align-items: center;
+  min-height: var(--touch-target-min);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.groupLink:hover {
+  background-color: var(--surface-tint);
+}

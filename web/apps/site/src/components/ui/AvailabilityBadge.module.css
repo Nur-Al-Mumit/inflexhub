@@ -1,0 +1,27 @@
+/* AvailabilityBadge (V1-1): semantic pairs from design-system §3. */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--font-small-size);
+  font-weight: var(--font-small-weight);
+  line-height: var(--font-small-line-height);
+}
+
+.available {
+  background-color: var(--success-surface);
+  color: var(--success-text);
+}
+
+.custom {
+  background-color: var(--info-surface);
+  color: var(--info-text);
+}
+
+.upcoming {
+  background-color: var(--upcoming-surface);
+  color: var(--upcoming-text);
+}

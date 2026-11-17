@@ -30,6 +30,7 @@ Footer columns: Products (by category) · Company (About, Custom software, Upcom
 | `/.well-known/security.txt` | Security contact | static file | RFC 9116 |
 | `/manifest.webmanifest`, icons | Web app basics | static | Name, theme colour `#141A4A`, icons |
 | `not-found` | 404 | static | Message · links |
+| `/dev/ui` | Component gallery (review aid) | static, **development only** | Every V1-1 component in every state (hover, focus-visible, disabled, error, loading); calls `notFound()` when `NODE_ENV=production`; never linked from the site and excluded from `sitemap.xml` (V1-12) |
 | `/api/inquiries` | Route handler | dynamic (server) | Forwards to API (ADR 0004) |
 | `/sitemap.xml`, `/robots.txt` | SEO | static | — |
 

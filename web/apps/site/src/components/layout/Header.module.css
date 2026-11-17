@@ -1,14 +1,27 @@
-/* Header (M0-6). V1-2 adds the sticky scroll state, mega menu, and mobile drawer. */
+/* Header (V1-2): sticky; transparent over the hero, solid on scroll. */
 
 .header {
-  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 80;
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease);
+}
+
+.solid {
   background-color: var(--surface);
+  border-bottom-color: var(--line);
+  box-shadow: var(--shadow-1);
 }
 
 .inner {
   max-width: var(--container-max);
   margin-inline: auto;
-  padding: var(--space-4) var(--container-gutter);
+  padding: var(--space-3) var(--container-gutter);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -22,26 +35,32 @@
 
 .nav {
   margin-inline-start: auto;
-}
-
-.navList {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.productsWrap {
+  position: relative;
+  display: inline-flex;
 }
 
 .navLink {
   display: inline-flex;
   align-items: center;
+  gap: var(--space-1);
   min-height: var(--touch-target-min);
   padding: var(--space-2) var(--space-3);
+  border: none;
   border-radius: var(--radius-sm);
+  background: none;
   color: var(--ink);
+  font-family: inherit;
+  font-size: var(--font-body-size);
   font-weight: 500;
   text-decoration: none;
+  cursor: pointer;
   transition: background-color var(--dur-fast) var(--ease);
 }
 
@@ -49,7 +68,98 @@
   background-color: var(--surface-tint);
 }
 
-/* Primary call to action (design system: orange with navy text, trailing arrow). */
+.chevron {
+  color: var(--muted);
+  transition: transform var(--dur-med) var(--ease);
+}
+
+.chevronOpen {
+  color: var(--muted);
+  transform: rotate(180deg);
+}
+
+/* Mega menu panel */
+.menuPanel {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(92vw, 1080px);
+  margin-top: var(--space-2);
+  padding: var(--space-6);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background-color: var(--surface);
+  box-shadow: var(--shadow-3);
+}
+
+.menuInner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.menuGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-5);
+}
+
+.menuGroupTitle {
+  margin-bottom: var(--space-2);
+  font-size: var(--font-overline-size);
+  line-height: var(--font-overline-line-height);
+  letter-spacing: var(--font-overline-letter-spacing);
+  text-transform: uppercase;
+  font-weight: var(--font-overline-weight);
+  color: var(--orange-700);
+}
+
+.menuGroupList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.menuProductLink {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.menuProductLink:hover {
+  background-color: var(--surface-tint);
+  color: var(--ink);
+}
+
+.menuFooter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+}
+
+.menuFooterLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-target-min);
+  color: var(--indigo-600);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.menuFooterLink:hover {
+  text-decoration: underline;
+}
+
+/* Primary call to action */
 .cta {
   display: inline-flex;
   align-items: center;
@@ -68,8 +178,34 @@
   background-color: var(--orange-600);
 }
 
-@media (max-width: 640px) {
-  .nav {
-    margin-inline-start: 0;
+/* Mobile menu button: hidden from 900 px up. */
+.menuButton {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--touch-target-min);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--border-input);
+  border-radius: var(--radius-md);
+  background-color: var(--surface);
+  color: var(--ink);
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.menuButton:hover {
+  background-color: var(--surface-tint);
+}
+
+@media (max-width: 899px) {
+  .nav,
+  .cta {
+    display: none;
+  }
+
+  .menuButton {
+    display: inline-flex;
+    margin-inline-start: auto;
   }
 }

@@ -1,0 +1,48 @@
+/* Textarea (V1-1) with counter. */
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.textarea {
+  min-height: 132px;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border-input);
+  border-radius: var(--radius-sm);
+  background-color: var(--surface);
+  color: var(--text);
+  font-family: inherit;
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
+  resize: vertical;
+}
+
+.textarea::placeholder {
+  color: var(--muted);
+}
+
+.textarea:hover:not(:disabled) {
+  border-color: var(--muted);
+}
+
+.textarea:disabled {
+  background-color: var(--surface-alt);
+  cursor: not-allowed;
+}
+
+.invalid {
+  border-color: var(--danger-text);
+}
+
+.invalid:focus-visible {
+  outline-color: var(--danger-text);
+}
+
+.counter {
+  align-self: flex-end;
+  font-size: var(--font-small-size);
+  line-height: var(--font-small-line-height);
+  color: var(--muted);
+}

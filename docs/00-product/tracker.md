@@ -17,7 +17,7 @@ Purpose: What is done and what is not, per version.
 |---|---|---|---|
 | Docs | 1 | 0 | review |
 | M0 | 8 | 8 | done (2026-11-17; docker compose verified) |
-| V1 | 34 | 0 | todo |
+| V1 | 34 | 2 | in progress (V1-1, V1-2 done) |
 | V1.1 | 9 | 0 | blocked (keys, domain, SMTP) |
 | V2 | — | — | planned |
 
@@ -48,8 +48,8 @@ M0 review fixes (2026-11-17, same branch): logo wordmark is "Infle" (navy) + a d
 
 | ID | Item | Story | Status | Tests |
 |---|---|---|---|---|
-| V1-1 | UI components (§7 design system) | — | todo | @ui |
-| V1-2 | Header with mega menu, mobile drawer, footer | US-1 | todo | @ui |
+| V1-1 | UI components (§7 design system) | — | done | @ui + `catalog.test.ts` (4), `aria.test.ts` (4) |
+| V1-2 | Header with mega menu, mobile drawer, footer | US-1 | done | @ui |
 | V1-3 | Home page | US-1 | todo | @ui |
 | V1-4 | Products list + filters | US-2 | todo | `filters.test.ts` |
 | V1-5 | Product detail + content for 15 products | US-3 | todo | `catalog.test.ts` |
@@ -82,6 +82,10 @@ M0 review fixes (2026-11-17, same branch): logo wordmark is "Infle" (navy) + a d
 | V1-32 | axe-core accessibility tests | US-17 | todo | `a11y.test.ts` |
 | V1-33 | `traceparent` propagation site → API | US-17 | todo | — |
 | V1-34 | CI: dependency audit, Dependabot, secret scanning | US-17 | todo | CI |
+
+V1-1/V1-2 notes (2026-11-17, branch `feature/V1-1-2-ui-layout`): 18 components in `src/components/ui/` (Button, ButtonLink, Badge, AvailabilityBadge, Card, Container, SectionHeader, Field, TextInput, Select, Textarea with counter, Checkbox, RadioCards, ChipGroup, Alert, Accordion, Breadcrumbs, CtaBand), each with its own CSS Module, tokens only. `src/lib/catalog.ts` is the only catalog reader (path resolution works in dev, `node --test`, and the standalone image); `catalog.test.ts` covers category grouping, slug uniqueness, reference validity, availability values. Review aid `/dev/ui` (route added to pages-and-flows.md) shows every component in every state and 404s in production (verified with `next start`); sitemap exclusion applies when V1-12 builds it. Header: sticky, solid on scroll; mega menu grouped by the 5 catalog categories + "All products" + "Coming soon" (catalog data passed from the server layout to the client Header as plain data); opens on click, Escape closes wherever focus is inside the products wrapper (including the trigger), focus returns to the trigger, outside click closes. Mobile drawer <900 px: `role="dialog"` + `aria-modal`, focus trapped (Tab cycles), Escape and close button, body scroll lock, focus returns to the menu button; order: Request a demo → Products (native details/summary: All products, category groups, Coming soon) → Industries → Custom Software → About → Contact; nav labelled "Mobile navigation". Footer gained the Products-by-category column (`/products?category=<slug>`). Logo: x stroke equals the letter stems (2.99 px vs 3.00 px at 22 px), zero gap before "Hub" (viewBox hugs the arrow), larger arrowhead with the tip 0.85 px above the cap height. Checked at 360/768/1280 px (no horizontal scroll) and keyboard-only (mega menu, drawer, skip link).
+
+V1-1/V1-2 review fixes (2026-11-17, same branch): Field now provides `FieldContext` (id, describedBy, invalid); TextInput, Select, Textarea, Checkbox and RadioCards are client components that consume it, so id/`aria-describedby`/`aria-invalid` land on the native control (never a wrapper); Textarea merges the Field ids with its counter id through `mergeDescribedBy` (`src/lib/aria.ts`, covered by `aria.test.ts`). Result verified on `/dev/ui` in dev: the Next.js hydration error overlay/badge is gone, all 11 label `for` attributes resolve to native controls, and the Textarea `aria-describedby` carries field-error/help **and** counter ids. Mega-menu Escape works from the trigger and from inside the panel (both return focus to the trigger). Drawer reordered with the Products details group; "Menu" button label vertically centred.
 
 ## V1.1 — Launch hardening
 

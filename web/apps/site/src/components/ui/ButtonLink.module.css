@@ -1,0 +1,95 @@
+/* ButtonLink (V1-1): Button styling on an anchor. */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease);
+}
+
+.button:focus-visible {
+  outline: 3px solid var(--focus-color);
+  outline-offset: 2px;
+}
+
+.primary {
+  background-color: var(--orange-500);
+  color: var(--navy-800);
+}
+
+.primary:hover {
+  background-color: var(--orange-600);
+}
+
+.secondary {
+  background-color: var(--navy-800);
+  color: var(--on-dark);
+}
+
+.secondary:hover {
+  background-color: var(--navy-700);
+}
+
+.outline {
+  background-color: transparent;
+  border-color: var(--border-input);
+  color: var(--ink);
+}
+
+.outline:hover {
+  background-color: var(--surface-tint);
+}
+
+.ghost {
+  background-color: transparent;
+  color: var(--ink);
+}
+
+.ghost:hover {
+  background-color: var(--surface-tint);
+}
+
+.onDarkGhost {
+  background-color: transparent;
+  color: var(--on-dark);
+}
+
+.onDarkGhost:hover {
+  background-color: var(--navy-700);
+}
+
+.md {
+  min-height: var(--touch-target-min);
+  padding: var(--space-2) var(--space-5);
+  font-size: var(--font-body-size);
+}
+
+.lg {
+  min-height: 52px;
+  padding: var(--space-3) var(--space-7);
+  font-size: var(--font-body-lg-size);
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.arrow {
+  transition: transform var(--dur-fast) var(--ease);
+}
+
+.button:hover .arrow,
+.button:focus-visible .arrow {
+  transform: translateX(2px);
+}

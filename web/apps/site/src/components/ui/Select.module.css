@@ -1,0 +1,48 @@
+/* Select (V1-1): wrapper keeps the chevron aligned over the native control. */
+
+.wrap {
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+}
+
+.select {
+  appearance: none;
+  width: 100%;
+  min-height: var(--touch-target-min);
+  padding: var(--space-2) var(--space-8) var(--space-2) var(--space-4);
+  border: 1px solid var(--border-input);
+  border-radius: var(--radius-sm);
+  background-color: var(--surface);
+  color: var(--text);
+  font-family: inherit;
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
+  cursor: pointer;
+}
+
+.select:hover:not(:disabled) {
+  border-color: var(--muted);
+}
+
+.select:disabled {
+  background-color: var(--surface-alt);
+  cursor: not-allowed;
+}
+
+.chevron {
+  position: absolute;
+  right: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.invalid {
+  border-color: var(--danger-text);
+}
+
+.invalid:focus-visible {
+  outline-color: var(--danger-text);
+}

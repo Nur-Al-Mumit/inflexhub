@@ -1,0 +1,37 @@
+/* SectionHeader (V1-1). */
+
+.sectionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 68ch;
+}
+
+.center {
+  align-items: center;
+  text-align: center;
+  margin-inline: auto;
+}
+
+.eyebrow {
+  font-size: var(--font-overline-size);
+  line-height: var(--font-overline-line-height);
+  letter-spacing: var(--font-overline-letter-spacing);
+  text-transform: uppercase;
+  font-weight: var(--font-overline-weight);
+  color: var(--orange-700);
+}
+
+.title {
+  font-size: var(--font-h2-size);
+  line-height: var(--font-h2-line-height);
+  letter-spacing: var(--font-h2-letter-spacing);
+  font-weight: var(--font-h2-weight);
+  color: var(--ink);
+}
+
+.intro {
+  font-size: var(--font-body-lg-size);
+  line-height: var(--font-body-lg-line-height);
+  color: var(--muted);
+}

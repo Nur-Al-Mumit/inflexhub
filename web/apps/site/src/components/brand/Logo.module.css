@@ -1,8 +1,8 @@
-/* Logo wordmark (M0-6): navy "Infle", drawn "x" on the text baseline, orange "Hub". */
+/* Logo wordmark (V1-2): navy "Infle", drawn "x" on the text baseline, orange "Hub". */
 
 .wordmark {
-  /* Plain inline layout: the inline svg's default baseline alignment places
-     its bottom edge exactly on the text baseline. */
+  /* Plain inline layout: the inline-block x aligns its bottom margin edge —
+     its baseline — with the text baseline. */
   display: inline;
   font-size: 22px;
   font-weight: var(--font-h2-weight);
@@ -27,13 +27,14 @@
 }
 
 /* The drawn letter x: inline-block so it flows inside the wordmark (the global
-   svg rule is display:block) and its bottom margin edge — its baseline — sits
-   on the text baseline. Sized in em so it scales with the font size. */
+   svg rule is display:block) and its bottom margin edge sits on the text
+   baseline. The viewBox hugs the drawn shapes, so the svg's right edge is the
+   arrow's edge — no gap before "Hub". */
 .x {
   display: inline-block;
-  width: 0.87em;
+  width: 0.81em;
   height: 0.8em;
-  margin-inline: 0.02em;
+  margin-left: 0.02em;
 }
 
 .xNavy {
