@@ -86,6 +86,7 @@ test("sitemap_lists_static_pages_products_and_industries", () => {
     "/contact",
     "/privacy",
     "/terms",
+    "/accessibility",
   ]) {
     assert.ok(urls.includes(path), `${path} missing from sitemap`);
   }

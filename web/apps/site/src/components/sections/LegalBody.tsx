@@ -12,9 +12,12 @@ export type LegalBodyProps = {
 };
 
 export function LegalBody({ document: doc }: LegalBodyProps) {
+  const updated = doc.updatedLabel
+    ? `${doc.updatedLabel} ${doc.lastUpdated}`
+    : `Last updated ${doc.lastUpdated} (draft — pending legal review, OV-7)`;
   return (
     <div className={styles.body}>
-      <p className={styles.updated}>Last updated {doc.lastUpdated} (draft — pending legal review, OV-7)</p>
+      <p className={styles.updated}>{updated}</p>
       {doc.sections.map((section) => (
         <section key={section.heading} className={styles.section}>
           <h2 className={styles.heading}>{section.heading}</h2>
@@ -29,6 +32,11 @@ export function LegalBody({ document: doc }: LegalBodyProps) {
                 <li key={bullet.slice(0, 24)}>{bullet}</li>
               ))}
             </ul>
+          ) : null}
+          {section.link ? (
+            <a className={styles.link} href={section.link.href}>
+              {section.link.label}
+            </a>
           ) : null}
         </section>
       ))}

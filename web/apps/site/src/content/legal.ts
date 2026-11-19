@@ -14,6 +14,8 @@ export type LegalSection = {
   readonly paragraphs: readonly string[];
   /** Optional bulleted list under the paragraphs. */
   readonly bullets?: readonly string[];
+  /** Optional action link under the paragraphs (e.g. the report address). */
+  readonly link?: { readonly href: string; readonly label: string };
 };
 
 export type LegalDocument = {
@@ -21,6 +23,8 @@ export type LegalDocument = {
   readonly title: string;
   readonly intro: string;
   readonly lastUpdated: string;
+  /** Overrides the default "last updated" line (e.g. "Last reviewed …"). */
+  readonly updatedLabel?: string;
   readonly sections: readonly LegalSection[];
 };
 
@@ -88,8 +92,7 @@ export const privacy: LegalDocument = {
   ],
 };
 
-export const terms: LegalDocument = {
-  eyebrow: "Legal",
+export const terms: LegalDocument = {  eyebrow: "Legal",
   title: "Terms of use",
   intro:
     "The rules for using this website. Quotations, projects, and partnerships are governed by their own written agreements.",
@@ -141,6 +144,66 @@ export const terms: LegalDocument = {
       heading: "Changes",
       paragraphs: [
         "InflexHub may update these terms; the current version is always on this page with its “last updated” date.",
+      ],
+    },
+  ],
+};
+
+/**
+ * Accessibility statement (V1-31, PRD P-11, US-17): target, how the site is
+ * built, known limitations, how to report a problem, date of last review
+ * (pages-and-flows "/accessibility"). ⏳ OV-2: draft wording pending owner
+ * review; the feedback address is the OV-3 placeholder.
+ */
+export const accessibility: LegalDocument = {
+  eyebrow: "Accessibility",
+  title: "Accessibility statement",
+  intro:
+    "InflexHub wants this website usable by everyone, including people using screen readers, keyboard navigation, or reduced-motion settings.",
+  lastUpdated: "20 November 2026",
+  updatedLabel: "Last reviewed",
+  sections: [
+    {
+      heading: "Conformance target",
+      paragraphs: [
+        "This website aims to meet WCAG 2.2 level AA. Conformance is checked in three ways: keyboard-only walk-throughs of every interactive flow, automated accessibility tests on the key pages, and manual checks of contrast, focus visibility, and motion at phone and desktop widths.",
+      ],
+    },
+    {
+      heading: "How the site is built",
+      paragraphs: [
+        "Accessibility is part of the site's design baseline, not an afterthought:",
+      ],
+      bullets: [
+        "Every interactive element is a native link, button, input, or select, with a visible label and a visible focus ring.",
+        "Forms validate as you go, show an error summary at the top that links to each problem, and never delete what you typed.",
+        "Dialogs trap keyboard focus while open, close with Escape, and return focus to the element that opened them.",
+        "Motion is subtle and short; when your system requests reduced motion, transitions and reveals are switched off.",
+        "Colour contrast uses a checked token set; colour is never the only signal for state or availability.",
+        "Pages are laid out to work from 360 pixel phone widths upward, with no horizontal scrolling.",
+      ],
+    },
+    {
+      heading: "Known limitations",
+      paragraphs: [
+        "No accessibility problems are currently known on this website. Two things are worth stating plainly:",
+      ],
+      bullets: [
+        "Product brochures, once published, are PDF documents; their accessibility depends on the source document, and InflexHub aims to provide tagged, searchable PDFs.",
+        "Automated tests catch many issues but not all — if something is hard or impossible to use, the report below is the fastest route to a fix.",
+      ],
+    },
+    {
+      heading: "Report a problem",
+      paragraphs: [
+        "Write with the page address and what happened; please include the browser and device if you can. Reports are treated as bugs and answered in the order they arrive.",
+      ],
+      link: { href: "mailto:hello@inflexhub.com", label: "hello@inflexhub.com" },
+    },
+    {
+      heading: "Assessment approach",
+      paragraphs: [
+        "This statement reflects the site as of the review date above. The site is reassessed whenever significant changes ship.",
       ],
     },
   ],

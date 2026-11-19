@@ -41,3 +41,11 @@
 .list li::marker {
   color: var(--orange-700);
 }
+
+.link {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
+  font-weight: 600;
+  color: var(--indigo-600);
+  overflow-wrap: anywhere;
+}
