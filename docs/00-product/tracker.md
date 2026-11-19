@@ -17,7 +17,7 @@ Purpose: What is done and what is not, per version.
 |---|---|---|---|
 | Docs | 1 | 0 | review |
 | M0 | 8 | 8 | done (2026-11-17; docker compose verified) |
-| V1 | 34 | 14 | in progress (V1-1 – V1-12 and V1-23, V1-24 done) |
+| V1 | 34 | 15 | in progress (V1-1 – V1-13 and V1-23, V1-24 done; site rows complete except V1-21/V1-30 – V1-32) |
 | V1.1 | 9 | 0 | blocked (keys, domain, SMTP) |
 | V2 | — | — | planned |
 
@@ -70,7 +70,9 @@ V1-11 notes (2026-11-20, branch `feature/V1-11-pages`, stacked on `feature/V1-fo
 | V1-12 | SEO: metadata, sitemap, robots, JSON-LD | US-11 | done | build + `seo.test.ts` (8) |
 
 V1-12 notes (2026-11-20, branch `feature/V1-12-seo`): `src/lib/seo.ts` (site URL from `NEXT_PUBLIC_SITE_URL`, OV-11 fallback `https://inflexhub.com`; JSON-LD builders) + `JsonLd` component. Sitemap lists every static page, all 15 products, all 9 industries — `/dev` and `/api` never listed; robots allows crawling but blocks `/api/` and `/dev/`. Canonical `alternates` on every page (product canonical stays clean under `?utm_source=x`, US-17 scenario); `metadataBase` + OpenGraph/Twitter defaults in the layout. JSON-LD: Organization + FAQPage on home, SoftwareApplication + BreadcrumbList + FAQPage on product pages, FAQPage on custom-software and partners. `lib/seo.ts`/`sitemap.ts`/`robots.ts` use relative `.ts` imports so they run under `node --test`. Verified in dev: sitemap.xml/robots.txt served, JSON-LD blocks parse with the right types, canonicals absolute. Favicon set + manifest stay with V1-30.
-| V1-13 | Site route handler `/api/inquiries` + source tracking | US-12 | todo | — |
+| V1-13 | Site route handler `/api/inquiries` + source tracking | US-12 | done | `inquiries-forwarder.test.ts` (7) |
+
+V1-13 notes (2026-11-20, branch `feature/V1-13-inquiries-handler`): `lib/inquiries-forwarder.ts` (client IP from `CF-Connecting-IP` else the first `X-Forwarded-For` hop; forward with `X-Site-Key`; upstream failures → anonymous 502 ProblemDetails; injectable fetch) + `app/api/inquiries/route.ts` (POST only, GET 405; 503 unconfigured, 400 empty/invalid JSON, 64 KB interim body guard — the formal limits stay V1-19; API status/body pass through). Verified end-to-end with a stub API on :9999: browser form → handler → 201 → ThankYou with reference; landing `utm_source=facebook&utm_campaign=launch` arrives in `source` with the form's page path (US-12); `01711-000000` reaches the API as `+8801711000000` (BR-10 through the whole stack); site key and client IP headers seen upstream. Source tracking itself (`SourceCapture` in the layout, first-load sessionStorage capture) shipped with the forms rows.
 | V1-14 | Domain: `Inquiry`, `InquiryProduct`, enums, `InquiryReference` | US-5–9 | todo | `InquiryReferenceTests` |
 | V1-15 | `SubmitInquiryCommand` + validator | US-5–9, US-12 | todo | `SubmitInquiryValidatorTests` |
 | V1-16 | `SubmitInquiryHandler` (BR-1, 2, 3, 5, 7, 9) | US-5–9, US-12 | todo | `SubmitInquiryHandlerTests` |
