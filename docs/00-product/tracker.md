@@ -17,7 +17,7 @@ Purpose: What is done and what is not, per version.
 |---|---|---|---|
 | Docs | 1 | 0 | review |
 | M0 | 8 | 8 | done (2026-11-17; docker compose verified) |
-| V1 | 34 | 19 | in progress (V1-1 – V1-13, V1-21, V1-23, V1-24, V1-30, V1-31, V1-33 done) |
+| V1 | 34 | 20 | in progress (all site rows done: V1-1 – V1-13, V1-21, V1-23, V1-24, V1-30 – V1-33; remaining V1 rows are backend or owner-blocked) |
 | V1.1 | 9 | 0 | blocked (keys, domain, SMTP) |
 | V2 | — | — | planned |
 
@@ -99,7 +99,9 @@ V1-30 notes (2026-11-20, branch `feature/V1-30-csp`): **nonce CSP deliberately n
 | V1-31 | Accessibility statement page; company legal details in footer | US-17 | done | @ui |
 
 V1-31 notes (2026-11-20, branch `feature/V1-31-accessibility`): `/accessibility` reuses `LegalBody` (gained `updatedLabel` + a per-section action link — the report address is a real `mailto:`). Statement covers the WCAG 2.2 AA target, how the site is built, honest limitations (none known; future brochure PDFs flagged), reporting, and the review date. Added to the sitemap + sitemap test. Footer legal details (©, registered name, trade licence, address — OV-18 placeholders) already shipped with V1-2 and verified present.
-| V1-32 | axe-core accessibility tests | US-17 | todo | `a11y.test.ts` |
+| V1-32 | axe-core accessibility tests | US-17 | done | `a11y.test.ts` (2) |
+
+V1-32 notes (2026-11-20, branch `feature/V1-32-axe`): `tests/a11y.test.ts` runs axe-core over the **prerendered HTML** of all 18 key pages (build output `.next/server/app/**.html`; CI now builds before testing). colour-contrast is disabled under jsdom (no layout) — contrast is covered by the checked token set. A one-time live-browser audit of the **hydrated** Suspense pages (axe injected over CDP) caught two real issues, both fixed: header/footer logo links' accessible names now contain the visible text (`InfleHub — InflexHub home`, label-content-name-mismatch), and `/products` gained a visually-hidden h2 for the results region (heading-order). Zero serious/critical/moderate violations on prerendered and hydrated pages. devDeps (axe-core, jsdom, @types/jsdom) are on the ui-guidelines approved list; 104/104 green.
 | V1-33 | `traceparent` propagation site → API | US-17 | done | `inquiries-forwarder.test.ts` (11 total) |
 
 V1-33 notes (2026-11-20, branch `feature/V1-33-traceparent`): `traceparentFor` in `lib/inquiries-forwarder.ts` continues a valid incoming W3C trace with a fresh parent id and starts a new trace otherwise; `forwardInquiry` (now options-object) sends it upstream and the route handler passes the browser header through. Verified end-to-end with a stub API: incoming trace id continued, fresh trace when absent.
