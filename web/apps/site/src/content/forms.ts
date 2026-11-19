@@ -23,7 +23,27 @@ export type FormCopy = {
   readonly success: ThankYouCopy;
 };
 
-export const formCopy: Record<Exclude<InquiryType, "contact">, FormCopy> = {
+export const formCopy: Record<InquiryType, FormCopy> = {
+  contact: {
+    whatNextTitle: "What happens after you write",
+    whatNextIntro:
+      "A real reply, tied to a reference number — not a ticket queue.",
+    whatNext: [
+      "You get a reference number the moment you submit.",
+      "Your message lands with the InflexHub team, next to the product context if there is one.",
+      "A person replies — usually with an answer, sometimes with a sharp question first.",
+    ],
+    success: {
+      heading: "Your message is in",
+      intro:
+        "InflexHub has your message. Keep the reference below — it identifies your conversation if you write again.",
+      nextSteps: [
+        "Check your email for the confirmation details.",
+        "InflexHub replies to the address you gave.",
+        "For anything urgent, include the reference in a follow-up.",
+      ],
+    },
+  },
   demo: {
     whatNextTitle: "What happens after you request a demo",
     whatNextIntro:

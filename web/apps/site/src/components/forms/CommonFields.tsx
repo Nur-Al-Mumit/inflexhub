@@ -30,7 +30,7 @@ type Api = {
 
 type TextApi = Api & {
   /** The InquiryValues key the input writes to (matches the error key). */
-  readonly field: "fullName" | "email" | "phone" | "company" | "jobTitle" | "region" | "userCount" | "currentSystem";
+  readonly field: "fullName" | "email" | "phone" | "company" | "jobTitle" | "region" | "userCount" | "currentSystem" | "subject";
 };
 
 function TextField({
@@ -43,6 +43,7 @@ function TextField({
   autoComplete,
   placeholder,
   inputMode,
+  maxLength,
 }: TextApi & {
   label: string;
   help?: string;
@@ -50,6 +51,7 @@ function TextField({
   autoComplete?: string;
   placeholder?: string;
   inputMode?: "text" | "email" | "tel" | "numeric";
+  maxLength?: number;
 }) {
   return (
     <Field id={`${idPrefix}-${field}`} label={label} help={help} error={form.shownErrors[field]}>
@@ -58,6 +60,7 @@ function TextField({
         inputMode={inputMode}
         autoComplete={autoComplete}
         placeholder={placeholder}
+        maxLength={maxLength}
         value={form.values[field] ?? ""}
         onChange={(event) => form.setValue(field, event.target.value)}
         onBlur={() => form.blur(field)}
@@ -142,6 +145,19 @@ export function RegionField({ idPrefix, form }: Api) {
       label="City or region you cover (optional)"
       autoComplete="address-level2"
       placeholder="e.g. Chattogram"
+    />
+  );
+}
+
+export function SubjectField({ idPrefix, form }: Api) {
+  return (
+    <TextField
+      idPrefix={idPrefix}
+      form={form}
+      field="subject"
+      label="Subject"
+      placeholder="e.g. Question about the POS demo"
+      maxLength={limits.subjectMax}
     />
   );
 }
