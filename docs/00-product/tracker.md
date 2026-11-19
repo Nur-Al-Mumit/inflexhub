@@ -17,7 +17,7 @@ Purpose: What is done and what is not, per version.
 |---|---|---|---|
 | Docs | 1 | 0 | review |
 | M0 | 8 | 8 | done (2026-11-17; docker compose verified) |
-| V1 | 34 | 16 | in progress (V1-1 – V1-13, V1-21, V1-23, V1-24 done) |
+| V1 | 34 | 17 | in progress (V1-1 – V1-13, V1-21, V1-23, V1-24, V1-33 done) |
 | V1.1 | 9 | 0 | blocked (keys, domain, SMTP) |
 | V2 | — | — | planned |
 
@@ -96,7 +96,9 @@ V1-7 – V1-10, V1-23 (form), V1-24 notes (2026-11-20, branch `feature/V1-forms-
 | V1-30 | CSP (nonce) + security headers, `security.txt`, canonical URLs, favicon set + manifest | US-17 | todo | @ui (securityheaders.com) |
 | V1-31 | Accessibility statement page; company legal details in footer | US-17 | todo | @ui |
 | V1-32 | axe-core accessibility tests | US-17 | todo | `a11y.test.ts` |
-| V1-33 | `traceparent` propagation site → API | US-17 | todo | — |
+| V1-33 | `traceparent` propagation site → API | US-17 | done | `inquiries-forwarder.test.ts` (11 total) |
+
+V1-33 notes (2026-11-20, branch `feature/V1-33-traceparent`): `traceparentFor` in `lib/inquiries-forwarder.ts` continues a valid incoming W3C trace with a fresh parent id and starts a new trace otherwise; `forwardInquiry` (now options-object) sends it upstream and the route handler passes the browser header through. Verified end-to-end with a stub API: incoming trace id continued, fresh trace when absent.
 | V1-34 | CI: dependency audit, Dependabot, secret scanning | US-17 | todo | CI |
 
 V1-1/V1-2 notes (2026-11-17, branch `feature/V1-1-2-ui-layout`): 18 components in `src/components/ui/` (Button, ButtonLink, Badge, AvailabilityBadge, Card, Container, SectionHeader, Field, TextInput, Select, Textarea with counter, Checkbox, RadioCards, ChipGroup, Alert, Accordion, Breadcrumbs, CtaBand), each with its own CSS Module, tokens only. `src/lib/catalog.ts` is the only catalog reader (path resolution works in dev, `node --test`, and the standalone image); `catalog.test.ts` covers category grouping, slug uniqueness, reference validity, availability values. Review aid `/dev/ui` (route added to pages-and-flows.md) shows every component in every state and 404s in production (verified with `next start`); sitemap exclusion applies when V1-12 builds it. Header: sticky, solid on scroll; mega menu grouped by the 5 catalog categories + "All products" + "Coming soon" (catalog data passed from the server layout to the client Header as plain data); opens on click, Escape closes wherever focus is inside the products wrapper (including the trigger), focus returns to the trigger, outside click closes. Mobile drawer <900 px: `role="dialog"` + `aria-modal`, focus trapped (Tab cycles), Escape and close button, body scroll lock, focus returns to the menu button; order: Request a demo → Products (native details/summary: All products, category groups, Coming soon) → Industries → Custom Software → About → Contact; nav labelled "Mobile navigation". Footer gained the Products-by-category column (`/products?category=<slug>`). Logo: x stroke equals the letter stems (2.99 px vs 3.00 px at 22 px), zero gap before "Hub" (viewBox hugs the arrow), larger arrowhead with the tip 0.85 px above the cap height. Checked at 360/768/1280 px (no horizontal scroll) and keyboard-only (mega menu, drawer, skip link).
