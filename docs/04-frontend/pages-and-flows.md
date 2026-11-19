@@ -9,6 +9,8 @@ Header: **Products** (mega menu by category + "All products" + "Coming soon") ·
 
 Footer columns: Products (by category) · Company (About, Custom software, Upcoming, **Partners**, Contact) · Get started (Request a demo, Request a quote, Register interest) · Contact details · Legal (Privacy, Terms, Accessibility). Bottom bar: © year, registered company name, trade licence number, registered address (OV-18).
 
+All inner pages open with `PageHero` (navy band: breadcrumbs, eyebrow or meta, h1, intro, actions, optional aside) and use the shared `Section` wrapper below it (ui-guidelines Part B).
+
 ## Route table
 
 | Route | Page | Rendering | Sections |

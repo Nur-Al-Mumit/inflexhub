@@ -15,11 +15,16 @@ export type BreadcrumbsProps = {
   /** Every crumb except the current page; the current page comes from `current`. */
   items: readonly Crumb[];
   current: string;
+  /** Use on navy surfaces (PageHero). */
+  tone?: "default" | "onDark";
 };
 
-export function Breadcrumbs({ items, current }: BreadcrumbsProps) {
+export function Breadcrumbs({ items, current, tone = "default" }: BreadcrumbsProps) {
   return (
-    <nav aria-label="Breadcrumb" className={styles.nav}>
+    <nav
+      aria-label="Breadcrumb"
+      className={tone === "onDark" ? `${styles.nav} ${styles.onDark}` : styles.nav}
+    >
       <ol className={styles.list}>
         <li className={styles.item}>
           <Link href="/" className={styles.link}>

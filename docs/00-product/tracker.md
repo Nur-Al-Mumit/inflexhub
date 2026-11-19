@@ -17,7 +17,7 @@ Purpose: What is done and what is not, per version.
 |---|---|---|---|
 | Docs | 1 | 0 | review |
 | M0 | 8 | 8 | done (2026-11-17; docker compose verified) |
-| V1 | 34 | 3 | in progress (V1-1, V1-2, V1-3 done) |
+| V1 | 34 | 7 | in progress (V1-1 – V1-6 and V1-23 done) |
 | V1.1 | 9 | 0 | blocked (keys, domain, SMTP) |
 | V2 | — | — | planned |
 
@@ -53,9 +53,13 @@ M0 review fixes (2026-11-17, same branch): logo wordmark is "Infle" (navy) + a d
 | V1-3 | Home page | US-1 | done | @ui + `catalog.test.ts` stats (2) |
 
 V1-3 notes (2026-11-17, branch `feature/V1-3-home`): all sections per the pages-and-flows "/" row — hero (both CTAs above the fold, SVG-only brand visual with the rising-arrow motif), catalog stats strip (`getCatalogStats`, catalog-only numbers: 15/5/9 and 5/5/5), products-by-category tabs (`ProductTabs`, APG pattern: roving tabindex, arrows + Home/End), availability explainer (PRD §1.3 states with matching actions), industries grid with factual product counts (`getIndustrySummaries`), why InflexHub, 4-step process, engagement models, FAQ (Accordion), CtaBand. Copy in `src/content/home.ts` (OV-2, modest; no invented numbers per OV-4). New `ProductCard` in `components/products/` (whole card = one link). Section reveal is CSS-only scroll-driven animation behind `@supports (animation-timeline: view())` + `prefers-reduced-motion: no-preference`; fully visible otherwise. Unique page title/description. Server Components except the tabs. Verified: stats match catalog (tests), tabs keyboard (focus+selection move, panel swaps), no horizontal scroll at 360/768/1280, CTAs above the fold at 1280.
-| V1-4 | Products list + filters | US-2 | todo | `filters.test.ts` |
-| V1-5 | Product detail + content for 15 products | US-3 | todo | `catalog.test.ts` |
-| V1-6 | Industries list + detail | US-4 | todo | @ui |
+| V1-4 | Products list + filters | US-2 | done | `filters.test.ts` (8) |
+| V1-5 | Product detail + content for 15 products | US-3 | done | `catalog.test.ts` (9 total) |
+
+V1-4/V1-5 notes (2026-11-20, branch `feature/V1-4-5-products-pages`): filters live in the URL (`?category=a,b&availability=…&industry=…&q=…`) through pure `src/lib/filters.ts` (parse/apply/serialize, round-trip tested; commas stay literal for readable links); `/products` is a static shell + client `ProductBrowser` (controlled ChipGroups, industry Select, search, `aria-live` count, empty state with Clear filters + custom-software link) inside Suspense. Product detail prerenders per slug (`generateStaticParams`, all 15); copy in `src/content/products/*.ts` keyed by slug (OV-2, modest), with tests enforcing catalog↔content parity, content completeness, and brochure-file existence (vacuous until OV-16 delivers PDFs). Actions follow availability (US-3: pos → demo `?product=pos`, erp → custom-software, lms → upcoming). Deviation: `dynamicParams = false` is incompatible with Next 16 `cacheComponents`; unknown slugs 404 through the `notFound()` guard instead (same visitor behaviour; the friendly 404 with an "all products" link lands with V1-11). Browser-verified: all US-2 scenarios (availability → 5 upcoming + URL param; education + "school" → School Management System only; empty state; `?category=healthcare` survives reload with the chip pressed), US-3 primary actions, 404 for unknown slugs, no overflow at 360/768/1280. Port 3000 was occupied by an unrelated app during checks — verified on :3100 (`npm run dev -- -p 3100`).
+| V1-6 | Industries list + detail | US-4 | done | @ui + industry content parity test |
+
+V1-6 notes (2026-11-20, branch `feature/V1-6-industries`, carries the uncommitted V1-4/V1-5 work): `/industries` lists all 9 industries as cards with factual catalog product counts; `/industries/[slug]` prerenders per slug (breadcrumbs, hero, challenges, every matching product with availability badges — US-4, why-InflexHub cards, browse-all CTA, CtaBand). Challenges/why copy in `src/content/industries.ts` (OV-2, modest); `catalog.test.ts` gains industry content-parity and completeness checks. Unknown slugs 404 via the `notFound()` guard (same cacheComponents note as V1-5). Verified: healthcare page shows exactly its 3 products with correct badges; counts match the catalog (retail 7, education 3, manufacturing 3); no overflow at 360/768/1280.
 | V1-7 | Custom software page + form | US-7 | todo | `inquiry.test.ts` |
 | V1-8 | Request demo page + form | US-5 | todo | `inquiry.test.ts` |
 | V1-9 | Request quote page + form | US-6 | todo | `inquiry.test.ts` |
@@ -72,7 +76,7 @@ V1-3 notes (2026-11-17, branch `feature/V1-3-home`): all sections per the pages-
 | V1-20 | Inquiries controller | US-5–9 | todo | — |
 | V1-21 | Security headers on the site | — | todo | — |
 | V1-22 | Owner content review (OV-1, OV-2, OV-3) | — | blocked | — |
-| V1-23 | Brochure download: catalog field, button, form, link (site) | US-13 | todo | `catalog.test.ts` (brochure files exist) |
+| V1-23 | Brochure download: catalog field, button, form, link (site) | US-13 | done (button + file check; the gated download form ships with the forms rows) | `catalog.test.ts` (brochure files exist) |
 | V1-24 | Partners page + application form | US-14 | todo | `inquiry.test.ts` |
 | V1-25 | API: `brochure_download` and `partner` types (validator, eligibility, BR-3 for brochures) | US-13, US-14 | todo | `SubmitInquiryValidatorTests`, `SubmitInquiryHandlerTests` |
 | V1-26 | Sales notification: queue, MailKit sender, retries, `sales_notified_at` | US-15 | todo | `SubmitInquiryHandlerTests`, `SalesNotificationTests` |

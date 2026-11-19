@@ -16,6 +16,7 @@ Make InflexHub look like a premium, trustworthy software company. A business, sc
 
 ## Must read first
 
+0. **[ui-guidelines](../../04-frontend/ui-guidelines.md) — absolute rules (UI-1 – UI-12) that override everything else in this prompt.** UI-1: never a one-sided accent border or stripe on any card or box.
 1. [PRD §1–3](../../00-product/PRD.md) (audiences, availability model, pages, forms)
 2. [design-system](../../04-frontend/design-system.md), [pages-and-flows](../../04-frontend/pages-and-flows.md)
 3. [product-catalog](../../00-product/product-catalog.md)
@@ -32,6 +33,7 @@ Make InflexHub look like a premium, trustworthy software company. A business, sc
 
 ## Guardrails
 
+- Every rule in [ui-guidelines](../../04-frontend/ui-guidelines.md) Part A is absolute; `tests/ui-guidelines.test.ts` must stay green and is never weakened, skipped, or deleted. If a rule blocks the work, stop and ask the owner.
 - No invented testimonials, client logos, numbers, or awards (OV-4, OV-5).
 - No stock photos of people; abstract SVG product visuals and brand shapes.
 - Orange `#EE7633` never carries white text (2.9:1); use navy text on orange or `orange-700` for small orange text.

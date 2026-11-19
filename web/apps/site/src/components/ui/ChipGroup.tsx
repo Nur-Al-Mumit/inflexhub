@@ -1,8 +1,9 @@
 "use client";
 
 /**
- * ChipGroup (V1-1): toggleable filter chips with aria-pressed
- * (design-system §7 filter bar). Uncontrolled with an optional onChange.
+ * ChipGroup (V1-1): toggleable chips with aria-pressed (design-system §7
+ * filter bar). Uncontrolled with defaultPressed, or controlled via `pressed`
+ * (the products filter bar drives it from the URL).
  */
 
 import { useState } from "react";
@@ -16,7 +17,10 @@ export type Chip = {
 export type ChipGroupProps = {
   "aria-label": string;
   chips: readonly Chip[];
+  /** Initial pressed values (uncontrolled). */
   defaultPressed?: readonly string[];
+  /** Controlled pressed values (e.g. parsed from the URL). */
+  pressed?: readonly string[];
   onChange?: (pressed: string[]) => void;
 };
 
@@ -24,22 +28,28 @@ export function ChipGroup({
   "aria-label": ariaLabel,
   chips,
   defaultPressed = [],
+  pressed,
   onChange,
 }: ChipGroupProps) {
-  const [pressed, setPressed] = useState<readonly string[]>(defaultPressed);
+  const [internalPressed, setInternalPressed] =
+    useState<readonly string[]>(defaultPressed);
+
+  const current = pressed ?? internalPressed;
 
   const toggle = (value: string) => {
-    const next = pressed.includes(value)
-      ? pressed.filter((item) => item !== value)
-      : [...pressed, value];
-    setPressed(next);
+    const next = current.includes(value)
+      ? current.filter((item) => item !== value)
+      : [...current, value];
+    if (pressed === undefined) {
+      setInternalPressed(next);
+    }
     onChange?.(next);
   };
 
   return (
     <div className={styles.group} role="group" aria-label={ariaLabel}>
       {chips.map((chip) => {
-        const isPressed = pressed.includes(chip.value);
+        const isPressed = current.includes(chip.value);
         return (
           <button
             key={chip.value}

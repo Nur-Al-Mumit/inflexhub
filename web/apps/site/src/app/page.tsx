@@ -8,10 +8,9 @@
  */
 
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight, MessageSquare } from "lucide-react";
 import { AvailabilityExplainer } from "@/components/sections/AvailabilityExplainer";
 import { EngagementModels } from "@/components/sections/EngagementModels";
+import { HelpCard } from "@/components/sections/HelpCard";
 import { Hero } from "@/components/sections/Hero";
 import { IndustryGrid } from "@/components/sections/IndustryGrid";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
@@ -34,7 +33,6 @@ import {
   whyIntro,
 } from "@/content/home";
 import { getCatalogStats, getCategoryGroups, getIndustrySummaries } from "@/lib/catalog";
-import styles from "./page.module.css";
 
 export const metadata: Metadata = {
   title: "Business software for companies, schools, and hospitals",
@@ -135,19 +133,7 @@ export default function HomePage() {
         eyebrow={faqIntro.eyebrow}
         title={faqIntro.title}
         intro={faqIntro.intro}
-        aside={
-          <div className={styles.faqAside}>
-            <span className={styles.faqAsideIcon} aria-hidden="true">
-              <MessageSquare size={20} />
-            </span>
-            <p className={styles.faqAsideTitle}>{faqIntro.aside.title}</p>
-            <p className={styles.faqAsideText}>{faqIntro.aside.text}</p>
-            <Link href={faqIntro.aside.action.href} className={styles.faqAsideLink}>
-              {faqIntro.aside.action.label}
-              <ArrowRight aria-hidden="true" size={16} />
-            </Link>
-          </div>
-        }
+        aside={<HelpCard {...faqIntro.aside} />}
       >
         <Accordion items={faqItems} />
       </Section>

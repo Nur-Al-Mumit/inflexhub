@@ -1,0 +1,14 @@
+/* Products page (V1-4). */
+
+.browse {
+  padding-block: var(--space-9) var(--section-padding);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.loading {
+  font-size: var(--font-body-size);
+  color: var(--muted);
+  padding: var(--space-6) 0;
+}

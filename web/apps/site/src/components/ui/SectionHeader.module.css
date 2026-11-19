@@ -30,6 +30,14 @@
   color: var(--ink);
 }
 
+/* Page heroes use the h1 type scale. */
+.titleH1 {
+  font-size: var(--font-h1-size);
+  line-height: var(--font-h1-line-height);
+  letter-spacing: var(--font-h1-letter-spacing);
+  font-weight: var(--font-h1-weight);
+}
+
 .intro {
   font-size: var(--font-body-lg-size);
   line-height: var(--font-body-lg-line-height);
