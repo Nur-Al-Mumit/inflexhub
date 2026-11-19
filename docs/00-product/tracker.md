@@ -17,7 +17,7 @@ Purpose: What is done and what is not, per version.
 |---|---|---|---|
 | Docs | 1 | 0 | review |
 | M0 | 8 | 8 | done (2026-11-17; docker compose verified) |
-| V1 | 34 | 17 | in progress (V1-1 – V1-13, V1-21, V1-23, V1-24, V1-33 done) |
+| V1 | 34 | 18 | in progress (V1-1 – V1-13, V1-21, V1-23, V1-24, V1-31, V1-33 done) |
 | V1.1 | 9 | 0 | blocked (keys, domain, SMTP) |
 | V2 | — | — | planned |
 
@@ -94,7 +94,9 @@ V1-7 – V1-10, V1-23 (form), V1-24 notes (2026-11-20, branch `feature/V1-forms-
 | V1-28 | Brochure PDFs from the owner | US-13 | blocked | OV-16 |
 | V1-29 | Enable sales email in an environment | US-15 | blocked | OV-12 |
 | V1-30 | CSP (nonce) + security headers, `security.txt`, canonical URLs, favicon set + manifest | US-17 | todo | @ui (securityheaders.com) |
-| V1-31 | Accessibility statement page; company legal details in footer | US-17 | todo | @ui |
+| V1-31 | Accessibility statement page; company legal details in footer | US-17 | done | @ui |
+
+V1-31 notes (2026-11-20, branch `feature/V1-31-accessibility`): `/accessibility` reuses `LegalBody` (gained `updatedLabel` + a per-section action link — the report address is a real `mailto:`). Statement covers the WCAG 2.2 AA target, how the site is built, honest limitations (none known; future brochure PDFs flagged), reporting, and the review date. Added to the sitemap + sitemap test. Footer legal details (©, registered name, trade licence, address — OV-18 placeholders) already shipped with V1-2 and verified present.
 | V1-32 | axe-core accessibility tests | US-17 | todo | `a11y.test.ts` |
 | V1-33 | `traceparent` propagation site → API | US-17 | done | `inquiries-forwarder.test.ts` (11 total) |
 
