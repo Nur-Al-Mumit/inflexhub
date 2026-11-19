@@ -30,6 +30,34 @@ export function clientIpFrom(headers: ForwardHeaders): string | null {
   return null;
 }
 
+const TRACEPARENT_PATTERN = /^00-([0-9a-f]{32})-([0-9a-f]{16})-([0-9a-f]{2})$/;
+const ALL_ZERO_TRACE = "00000000000000000000000000000000";
+const ALL_ZERO_SPAN = "0000000000000000";
+
+function randomHex(length: number, nextRandom: () => number): string {
+  let hex = "";
+  while (hex.length < length) {
+    hex += Math.floor(nextRandom() * 0x100000000).toString(16).padStart(8, "0");
+  }
+  return hex.slice(0, length);
+}
+
+/**
+ * The traceparent the site sends upstream (W3C Trace Context, V1-33/US-17):
+ * a valid incoming trace continues with a fresh parent id; anything else
+ * starts a new trace. `nextRandom` is injectable for tests.
+ */
+export function traceparentFor(
+  incoming: string | null,
+  nextRandom: () => number = Math.random,
+): string {
+  const match = incoming ? incoming.trim().toLowerCase().match(TRACEPARENT_PATTERN) : null;
+  const traceId =
+    match && match[1] !== ALL_ZERO_TRACE ? match[1] : randomHex(32, nextRandom);
+  const flags = match ? match[3] : "01";
+  return `00-${traceId}-${randomHex(16, nextRandom)}-${flags}`;
+}
+
 export type ForwardResult = {
   readonly status: number;
   readonly body: string;
@@ -54,29 +82,38 @@ function problem(status: number, slug: string, title: string): ForwardResult {
   };
 }
 
+export type ForwardInquiryInput = {
+  readonly apiBaseUrl: string;
+  readonly siteKey: string;
+  /** The visitor's JSON payload, forwarded verbatim. */
+  readonly payload: string;
+  readonly clientIp: string | null;
+  /** The browser request's traceparent, if any (V1-33). */
+  readonly traceparent?: string | null;
+};
+
 /**
  * Forwards one inquiry payload to the API and returns the upstream status
- * and body verbatim. Upstream problems become ProblemDetails with a 5xx
+ * and body verbatim. Sends a `traceparent` (V1-33) so API logs correlate
+ * with the site's trace. Upstream problems become ProblemDetails with a 5xx
  * status; the visitor's message never contains API internals.
  */
 export async function forwardInquiry(
-  apiBaseUrl: string,
-  siteKey: string,
-  payload: string,
-  clientIp: string | null,
+  input: ForwardInquiryInput,
   deps: ForwardDeps = {},
 ): Promise<ForwardResult> {
   const doFetch = deps.fetch ?? fetch;
   let upstream: Response;
   try {
-    upstream = await doFetch(`${apiBaseUrl.replace(/\/$/, "")}/api/v1/inquiries`, {
+    upstream = await doFetch(`${input.apiBaseUrl.replace(/\/$/, "")}/api/v1/inquiries`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        "x-site-key": siteKey,
-        ...(clientIp ? { "x-forwarded-for": clientIp } : {}),
+        "x-site-key": input.siteKey,
+        traceparent: traceparentFor(input.traceparent ?? null),
+        ...(input.clientIp ? { "x-forwarded-for": input.clientIp } : {}),
       },
-      body: payload,
+      body: input.payload,
     });
   } catch {
     // API unreachable (compose down, network partition): the form shows its

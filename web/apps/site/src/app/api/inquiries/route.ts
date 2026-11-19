@@ -61,7 +61,13 @@ export async function POST(request: Request): Promise<NextResponse> {
     );
   }
 
-  const result = await forwardInquiry(apiBaseUrl, siteKey, raw, clientIpFrom(request.headers));
+  const result = await forwardInquiry({
+    apiBaseUrl,
+    siteKey,
+    payload: raw,
+    clientIp: clientIpFrom(request.headers),
+    traceparent: request.headers.get("traceparent"),
+  });
   return new NextResponse(result.body, {
     status: result.status,
     headers: { "content-type": result.contentType },
