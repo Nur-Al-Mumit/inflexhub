@@ -25,6 +25,7 @@ import { stagger } from "@/lib/motion";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/about" },
   title: "About",
   description:
     "InflexHub designs and delivers business software from Bangladesh to international standards — honest availability, plain prices, one team end to end.",

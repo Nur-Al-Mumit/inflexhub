@@ -9,6 +9,7 @@ import type { Metadata } from "next";
 import { PartnerForm } from "@/components/forms/PartnerForm";
 import { WhatNext } from "@/components/forms/WhatNext";
 import { HelpCard } from "@/components/sections/HelpCard";
+import { JsonLd } from "@/components/sections/JsonLd";
 import { PageHero } from "@/components/sections/PageHero";
 import { Section } from "@/components/sections/Section";
 import { Accordion } from "@/components/ui/Accordion";
@@ -28,10 +29,12 @@ import {
 } from "@/content/partners";
 import { formCopy } from "@/content/forms";
 import { getCatalog } from "@/lib/catalog";
+import { faqJsonLd } from "@/lib/seo";
 import { stagger } from "@/lib/motion";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/partners" },
   title: "Partners",
   description:
     "Resell, implement, or refer InflexHub products in your market — apply to the partner program and work with one team across the catalog.",
@@ -48,6 +51,7 @@ export default function PartnersPage() {
 
   return (
     <>
+      <JsonLd data={faqJsonLd(faqItems)} />
       <PageHero
         breadcrumbs={{ items: [], current: "Partners" }}
         eyebrow={hero.eyebrow}

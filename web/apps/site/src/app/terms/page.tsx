@@ -10,6 +10,7 @@ import { Section } from "@/components/sections/Section";
 import { terms } from "@/content/legal";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/terms" },
   title: "Terms of use",
   description:
     "The rules for using the InflexHub website. Quotations and projects are governed by their own written agreements.",

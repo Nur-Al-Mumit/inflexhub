@@ -38,6 +38,7 @@ export async function generateMetadata({
   return {
     title: `${industry.name} software`,
     description: `Business software for ${industry.name.toLowerCase()}: the InflexHub products built for this industry, with availability up front.`,
+    alternates: { canonical: `/industries/${industry.slug}` },
   };
 }
 

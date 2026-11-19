@@ -16,6 +16,7 @@ import { stagger } from "@/lib/motion";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/upcoming" },
   title: "Coming soon",
   description:
     "InflexHub products on the roadmap. Register your interest — demand decides what gets built next.",

@@ -14,6 +14,7 @@ import { getCatalog } from "@/lib/catalog";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/products" },
   title: "Products",
   description:
     "Browse every InflexHub product — ERP, POS, school, hospital, and more — with availability up front: ready to use, built on request, or coming soon.",

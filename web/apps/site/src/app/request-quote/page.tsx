@@ -16,6 +16,7 @@ import { getCatalog } from "@/lib/catalog";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/request-quote" },
   title: "Request a quotation",
   description:
     "Get a transparent quotation for one or more InflexHub products — ready to use or built on request.",

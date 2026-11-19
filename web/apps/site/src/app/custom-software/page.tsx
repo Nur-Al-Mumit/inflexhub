@@ -11,6 +11,7 @@ import { CustomSoftwareForm } from "@/components/forms/CustomSoftwareForm";
 import { WhatNext } from "@/components/forms/WhatNext";
 import { EngagementModels } from "@/components/sections/EngagementModels";
 import { HelpCard } from "@/components/sections/HelpCard";
+import { JsonLd } from "@/components/sections/JsonLd";
 import { PageHero } from "@/components/sections/PageHero";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { Section } from "@/components/sections/Section";
@@ -30,9 +31,11 @@ import { engagementIntro, processIntro } from "@/content/home";
 import { formCopy } from "@/content/forms";
 import { getCatalog } from "@/lib/catalog";
 import { stagger } from "@/lib/motion";
+import { faqJsonLd } from "@/lib/seo";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/custom-software" },
   title: "Custom software",
   description:
     "When no catalog product fits: InflexHub designs, builds, and supports software around how your organisation works — from requirements to go-live.",
@@ -49,6 +52,7 @@ export default function CustomSoftwarePage() {
 
   return (
     <>
+      <JsonLd data={faqJsonLd(faqItems)} />
       <PageHero
         breadcrumbs={{ items: [], current: "Custom software" }}
         eyebrow={hero.eyebrow}

@@ -13,6 +13,7 @@ import { getIndustrySummaries } from "@/lib/catalog";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/industries" },
   title: "Industries",
   description:
     "Industries InflexHub builds for — retail, manufacturing, education, healthcare, and more — with the products that serve each.",

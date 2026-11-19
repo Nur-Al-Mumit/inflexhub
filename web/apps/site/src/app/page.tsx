@@ -13,6 +13,7 @@ import { EngagementModels } from "@/components/sections/EngagementModels";
 import { HelpCard } from "@/components/sections/HelpCard";
 import { Hero } from "@/components/sections/Hero";
 import { IndustryGrid } from "@/components/sections/IndustryGrid";
+import { JsonLd } from "@/components/sections/JsonLd";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { ProductTabs } from "@/components/sections/ProductTabs";
 import { Section } from "@/components/sections/Section";
@@ -33,11 +34,13 @@ import {
   whyIntro,
 } from "@/content/home";
 import { getCatalogStats, getCategoryGroups, getIndustrySummaries } from "@/lib/catalog";
+import { faqJsonLd, organizationJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Business software for companies, schools, and hospitals",
   description:
     "Explore the InflexHub catalog: ERP, POS, school and hospital systems, and more — ready to use, built on request, or coming soon.",
+  alternates: { canonical: "/" },
 };
 
 export default function HomePage() {
@@ -56,6 +59,8 @@ export default function HomePage() {
 
   return (
     <>
+      <JsonLd data={organizationJsonLd()} />
+      <JsonLd data={faqJsonLd(faqItems)} />
       <Hero />
       <StatsStrip stats={stats} />
 

@@ -17,6 +17,7 @@ import { CustomSoftwareTile } from "@/components/products/CustomSoftwareTile";
 import { ProductCard } from "@/components/products/ProductCard";
 import { productIcon } from "@/components/products/productIcons";
 import { HelpCard } from "@/components/sections/HelpCard";
+import { JsonLd } from "@/components/sections/JsonLd";
 import { PageHero } from "@/components/sections/PageHero";
 import { Section } from "@/components/sections/Section";
 import { Accordion } from "@/components/ui/Accordion";
@@ -27,6 +28,7 @@ import { CtaBand } from "@/components/ui/CtaBand";
 import { getProductContent } from "@/content/products";
 import { getCatalog, type CatalogProduct } from "@/lib/catalog";
 import { stagger } from "@/lib/motion";
+import { breadcrumbJsonLd, faqJsonLd, softwareApplicationJsonLd } from "@/lib/seo";
 import styles from "./page.module.css";
 
 type Action = { readonly href: string; readonly label: string };
@@ -71,7 +73,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const product = getCatalog().products.find((item) => item.slug === slug);
-  return product ? { title: product.name, description: product.tagline } : {};
+  return product
+    ? {
+        title: product.name,
+        description: product.tagline,
+        alternates: { canonical: `/products/${product.slug}` },
+      }
+    : {};
 }
 
 export default async function ProductPage({
@@ -119,6 +127,15 @@ export default async function ProductPage({
 
   return (
     <>
+      <JsonLd data={softwareApplicationJsonLd(product)} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Products", path: "/products" },
+          { name: product.name, path: `/products/${product.slug}` },
+        ])}
+      />
+      <JsonLd data={faqJsonLd(content.faq)} />
       <PageHero
         breadcrumbs={{
           items: [{ href: "/products", label: "Products" }],

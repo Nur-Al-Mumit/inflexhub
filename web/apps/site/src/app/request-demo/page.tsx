@@ -15,6 +15,7 @@ import { getCatalog } from "@/lib/catalog";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/request-demo" },
   title: "Request a demo",
   description:
     "Book a walkthrough of any ready-to-use InflexHub product — pick a date and time window that suit you.",

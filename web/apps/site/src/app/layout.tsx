@@ -7,6 +7,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { company } from "@/content/company";
 import { getCategoryGroups } from "@/lib/catalog";
+import { SITE_URL } from "@/lib/seo";
 
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
@@ -15,12 +16,22 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: `${company.name} — ${company.tagline}`,
     template: `%s — ${company.name}`,
   },
   description:
     "Business software for companies, educational institutions, and healthcare organisations: ready to use, built on request, or coming soon.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: company.name,
+    url: SITE_URL,
+  },
+  twitter: {
+    card: "summary",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

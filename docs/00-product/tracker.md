@@ -17,7 +17,7 @@ Purpose: What is done and what is not, per version.
 |---|---|---|---|
 | Docs | 1 | 0 | review |
 | M0 | 8 | 8 | done (2026-11-17; docker compose verified) |
-| V1 | 34 | 13 | in progress (V1-1 – V1-11 and V1-23, V1-24 done) |
+| V1 | 34 | 14 | in progress (V1-1 – V1-12 and V1-23, V1-24 done) |
 | V1.1 | 9 | 0 | blocked (keys, domain, SMTP) |
 | V2 | — | — | planned |
 
@@ -67,7 +67,9 @@ V1-6 notes (2026-11-20, branch `feature/V1-6-industries`, carries the uncommitte
 | V1-11 | About, contact, privacy, terms, 404 | US-8, US-10 | done | @ui |
 
 V1-11 notes (2026-11-20, branch `feature/V1-11-pages`, stacked on `feature/V1-forms-ui`): about (story, mission/vision, values, catalog-fact stats, CTA — copy in `content/about.ts`, OV-2/OV-4; OV-18 legal facts in an "at a glance" card), contact (four channel cards from `company.ts` OV-3 placeholders + the seventh inquiry type `contact` on the shared form system: name/email/subject/message required, phone/company optional, subject capped at 160, message 10–5,000; `contact` copy added to `formCopy`), privacy and terms as long-form `LegalBody` from `content/legal.ts` (OV-7 draft + visible "pending legal review" note, OV-14 retention proposal, OV-19 generic law), and `not-found.tsx` + `error.tsx` per P-12 (helpful links incl. "Browse all products", factual catalog counts only). Unknown routes and unknown product slugs both answer 404 (proxy rewrite) with the friendly page. Browser-verified: contact summary links exactly the required fields and keeps values on the network error; 360/768/1280 no overflow; screenshots reviewed.
-| V1-12 | SEO: metadata, sitemap, robots, JSON-LD | US-11 | todo | build |
+| V1-12 | SEO: metadata, sitemap, robots, JSON-LD | US-11 | done | build + `seo.test.ts` (8) |
+
+V1-12 notes (2026-11-20, branch `feature/V1-12-seo`): `src/lib/seo.ts` (site URL from `NEXT_PUBLIC_SITE_URL`, OV-11 fallback `https://inflexhub.com`; JSON-LD builders) + `JsonLd` component. Sitemap lists every static page, all 15 products, all 9 industries — `/dev` and `/api` never listed; robots allows crawling but blocks `/api/` and `/dev/`. Canonical `alternates` on every page (product canonical stays clean under `?utm_source=x`, US-17 scenario); `metadataBase` + OpenGraph/Twitter defaults in the layout. JSON-LD: Organization + FAQPage on home, SoftwareApplication + BreadcrumbList + FAQPage on product pages, FAQPage on custom-software and partners. `lib/seo.ts`/`sitemap.ts`/`robots.ts` use relative `.ts` imports so they run under `node --test`. Verified in dev: sitemap.xml/robots.txt served, JSON-LD blocks parse with the right types, canonicals absolute. Favicon set + manifest stay with V1-30.
 | V1-13 | Site route handler `/api/inquiries` + source tracking | US-12 | todo | — |
 | V1-14 | Domain: `Inquiry`, `InquiryProduct`, enums, `InquiryReference` | US-5–9 | todo | `InquiryReferenceTests` |
 | V1-15 | `SubmitInquiryCommand` + validator | US-5–9, US-12 | todo | `SubmitInquiryValidatorTests` |

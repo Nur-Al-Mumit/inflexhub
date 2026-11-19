@@ -11,6 +11,7 @@ import { Section } from "@/components/sections/Section";
 import { privacy } from "@/content/legal";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/privacy" },
   title: "Privacy policy",
   description:
     "What InflexHub collects through this website, why, for how long, and the rights you have over your data.",

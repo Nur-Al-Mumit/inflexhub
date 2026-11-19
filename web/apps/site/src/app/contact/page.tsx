@@ -19,6 +19,7 @@ import { stagger } from "@/lib/motion";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/contact" },
   title: "Contact",
   description:
     "Write to InflexHub: email, phone, office hours in Dhaka, and a contact form that answers with a reference number.",
