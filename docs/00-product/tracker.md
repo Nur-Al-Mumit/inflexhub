@@ -17,7 +17,7 @@ Purpose: What is done and what is not, per version.
 |---|---|---|---|
 | Docs | 1 | 0 | review |
 | M0 | 8 | 8 | done (2026-11-17; docker compose verified) |
-| V1 | 34 | 15 | in progress (V1-1 – V1-13 and V1-23, V1-24 done; site rows complete except V1-21/V1-30 – V1-32) |
+| V1 | 34 | 16 | in progress (V1-1 – V1-13, V1-21, V1-23, V1-24 done) |
 | V1.1 | 9 | 0 | blocked (keys, domain, SMTP) |
 | V2 | — | — | planned |
 
@@ -80,7 +80,9 @@ V1-13 notes (2026-11-20, branch `feature/V1-13-inquiries-handler`): `lib/inquiri
 | V1-18 | Repository, migration `Inquiries`, demand views | US-12 | todo | review |
 | V1-19 | Site key check, rate limiter (BR-4), body size limit | US-12 | todo | — |
 | V1-20 | Inquiries controller | US-5–9 | todo | — |
-| V1-21 | Security headers on the site | — | todo | — |
+| V1-21 | Security headers on the site | — | done | — |
+
+V1-21 notes (2026-11-20, branch `feature/V1-21-security-headers`): proxy.ts now sets X-Frame-Options DENY, X-Content-Type-Options nosniff, Referrer-Policy strict-origin-when-cross-origin, Permissions-Policy camera=(), microphone=(), geolocation=(), and Cross-Origin-Opener-Policy same-origin on every response (matcher extended from the slug guard to all non-static routes). The nonce-based CSP and `security.txt` stay with V1-30; HSTS is V1.1 with the production domain. Verified in dev: headers on all pages, unknown-slug 404s intact, `/api/inquiries` still reaches the handler.
 | V1-22 | Owner content review (OV-1, OV-2, OV-3) | — | blocked | — |
 | V1-23 | Brochure download: catalog field, button, form, link (site) | US-13 | done | `catalog.test.ts` (brochure files exist) |
 | V1-24 | Partners page + application form | US-14 | done | `inquiry.test.ts` |
