@@ -86,6 +86,9 @@ export function ProductBrowser({
 
   return (
     <div>
+      {/* The results region's heading: the page jumps from the hero h1 to
+          product-card h3s otherwise (axe heading-order). */}
+      <h2 className="visually-hidden">Products</h2>
       <div className={styles.bar}>
         <ChipGroup
           aria-label="Filter by category"

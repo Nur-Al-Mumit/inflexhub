@@ -34,7 +34,7 @@ jobs:
         run: dotnet test InflexHub.slnx --no-build
 
   frontend:
-    name: Frontend (typecheck + tests + build)
+    name: Frontend (typecheck + build + tests)
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -55,8 +55,10 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
-      - name: Unit tests
-        run: npm test
-
+      # Before the unit tests: tests/a11y.test.ts runs axe-core against the
+      # prerendered HTML this build produces (V1-32).
       - name: Build
         run: npm run build
+
+      - name: Unit tests
+        run: npm test

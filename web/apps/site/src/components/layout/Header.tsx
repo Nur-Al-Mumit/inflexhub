@@ -75,7 +75,7 @@ export function Header({
         .join(" ")}
     >
       <div className={styles.inner}>
-        <Link href="/" aria-label="InflexHub home" className={styles.homeLink}>
+        <Link href="/" aria-label="InfleHub — InflexHub home" className={styles.homeLink}>
           <Logo />
         </Link>
 
