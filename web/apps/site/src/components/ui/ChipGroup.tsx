@@ -2,8 +2,11 @@
 
 /**
  * ChipGroup (V1-1): toggleable chips with aria-pressed (design-system §7
- * filter bar). Uncontrolled with defaultPressed, or controlled via `pressed`
- * (the products filter bar drives it from the URL).
+ * filter bar, and "multi-select chips" in forms). Uncontrolled with
+ * defaultPressed, or controlled via `pressed` (the products filter bar drives
+ * it from the URL; inquiry forms drive it from form state). In forms, pass an
+ * `id` so the error summary can link to the group (tabIndex -1 lets focus
+ * land on it).
  */
 
 import { useState } from "react";
@@ -22,6 +25,11 @@ export type ChipGroupProps = {
   /** Controlled pressed values (e.g. parsed from the URL). */
   pressed?: readonly string[];
   onChange?: (pressed: string[]) => void;
+  /** Stable id for the group (error-summary links). */
+  id?: string;
+  /** Error text id, so screen readers announce it with the group. */
+  "aria-describedby"?: string;
+  invalid?: boolean;
 };
 
 export function ChipGroup({
@@ -30,6 +38,9 @@ export function ChipGroup({
   defaultPressed = [],
   pressed,
   onChange,
+  id,
+  "aria-describedby": ariaDescribedBy,
+  invalid = false,
 }: ChipGroupProps) {
   const [internalPressed, setInternalPressed] =
     useState<readonly string[]>(defaultPressed);
@@ -47,7 +58,17 @@ export function ChipGroup({
   };
 
   return (
-    <div className={styles.group} role="group" aria-label={ariaLabel}>
+    <div
+      id={id}
+      role="group"
+      aria-label={ariaLabel}
+      aria-describedby={ariaDescribedBy}
+      aria-invalid={invalid || undefined}
+      tabIndex={-1}
+      className={[styles.group, invalid ? styles.invalidGroup : ""]
+        .filter(Boolean)
+        .join(" ")}
+    >
       {chips.map((chip) => {
         const isPressed = current.includes(chip.value);
         return (

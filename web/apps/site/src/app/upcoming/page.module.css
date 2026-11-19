@@ -1,0 +1,63 @@
+/* Upcoming products page (V1-10). */
+
+.count {
+  font-size: var(--font-small-size);
+  font-weight: 600;
+  color: var(--on-dark-muted);
+}
+
+.steps {
+  display: grid;
+  gap: var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 900px) {
+  .steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background-color: var(--surface);
+  box-shadow: var(--shadow-1);
+  height: 100%;
+}
+
+.marker {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  background-color: var(--surface-tint);
+  color: var(--indigo-600);
+  font-size: var(--font-small-size);
+  font-weight: 700;
+}
+
+.stepTitle {
+  font-size: var(--font-h4-size);
+  line-height: var(--font-h4-line-height);
+  font-weight: var(--font-h4-weight);
+}
+
+.stepText {
+  margin-top: var(--space-2);
+  color: var(--muted);
+}
+
+.loading {
+  font-size: var(--font-body-size);
+  color: var(--muted);
+  padding: var(--space-6) 0;
+}

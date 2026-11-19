@@ -17,7 +17,7 @@ Purpose: What is done and what is not, per version.
 |---|---|---|---|
 | Docs | 1 | 0 | review |
 | M0 | 8 | 8 | done (2026-11-17; docker compose verified) |
-| V1 | 34 | 7 | in progress (V1-1 – V1-6 and V1-23 done) |
+| V1 | 34 | 12 | in progress (V1-1 – V1-10 and V1-23, V1-24 done) |
 | V1.1 | 9 | 0 | blocked (keys, domain, SMTP) |
 | V2 | — | — | planned |
 
@@ -60,10 +60,10 @@ V1-4/V1-5 notes (2026-11-20, branch `feature/V1-4-5-products-pages`): filters li
 | V1-6 | Industries list + detail | US-4 | done | @ui + industry content parity test |
 
 V1-6 notes (2026-11-20, branch `feature/V1-6-industries`, carries the uncommitted V1-4/V1-5 work): `/industries` lists all 9 industries as cards with factual catalog product counts; `/industries/[slug]` prerenders per slug (breadcrumbs, hero, challenges, every matching product with availability badges — US-4, why-InflexHub cards, browse-all CTA, CtaBand). Challenges/why copy in `src/content/industries.ts` (OV-2, modest); `catalog.test.ts` gains industry content-parity and completeness checks. Unknown slugs 404 via the `notFound()` guard (same cacheComponents note as V1-5). Verified: healthcare page shows exactly its 3 products with correct badges; counts match the catalog (retail 7, education 3, manufacturing 3); no overflow at 360/768/1280.
-| V1-7 | Custom software page + form | US-7 | todo | `inquiry.test.ts` |
-| V1-8 | Request demo page + form | US-5 | todo | `inquiry.test.ts` |
-| V1-9 | Request quote page + form | US-6 | todo | `inquiry.test.ts` |
-| V1-10 | Upcoming page + interest form | US-9 | todo | `inquiry.test.ts` |
+| V1-7 | Custom software page + form | US-7 | done | `inquiry.test.ts` |
+| V1-8 | Request demo page + form | US-5 | done | `inquiry.test.ts` |
+| V1-9 | Request quote page + form | US-6 | done | `inquiry.test.ts` |
+| V1-10 | Upcoming page + interest form | US-9 | done | `inquiry.test.ts` |
 | V1-11 | About, contact, privacy, terms, 404 | US-8, US-10 | todo | @ui |
 | V1-12 | SEO: metadata, sitemap, robots, JSON-LD | US-11 | todo | build |
 | V1-13 | Site route handler `/api/inquiries` + source tracking | US-12 | todo | — |
@@ -76,8 +76,10 @@ V1-6 notes (2026-11-20, branch `feature/V1-6-industries`, carries the uncommitte
 | V1-20 | Inquiries controller | US-5–9 | todo | — |
 | V1-21 | Security headers on the site | — | todo | — |
 | V1-22 | Owner content review (OV-1, OV-2, OV-3) | — | blocked | — |
-| V1-23 | Brochure download: catalog field, button, form, link (site) | US-13 | done (button + file check; the gated download form ships with the forms rows) | `catalog.test.ts` (brochure files exist) |
-| V1-24 | Partners page + application form | US-14 | todo | `inquiry.test.ts` |
+| V1-23 | Brochure download: catalog field, button, form, link (site) | US-13 | done | `catalog.test.ts` (brochure files exist) |
+| V1-24 | Partners page + application form | US-14 | done | `inquiry.test.ts` |
+
+V1-7 – V1-10, V1-23 (form), V1-24 notes (2026-11-20, branch `feature/V1-forms-ui`): all seven inquiry types share one rule engine in pure `src/lib/inquiry.ts` (the api-spec per-type table, BR-8 lengths, enums, BR-2 eligibility, BR-10 phone normalisation to E.164 with the exact Bangladesh mobile shapes, demo date window in Asia/Dhaka, and `buildPayload` producing the api-spec request body — the api-spec request example is pinned by a test). `src/lib/source.ts` captures utm_* + referrer on first load into sessionStorage (`SourceCapture` in the root layout, try/catch) and attaches the form's page path. Forms live in `components/forms/` on one `useInquiry` hook + `FormPanel` (honeypot `website` visually hidden + tabIndex -1, error summary linking to every field and taking focus on failed submit, validate on blur + submit, values never cleared on error, consent checkbox, loading submit) and swap to a ThankYou panel with the reference, focus on its heading. API error paths wired per pages-and-flows: 400 field errors mapped 1:1, 422 → productSlugs, 429 → minutes message, network/other → Alert with values kept (the `/api/inquiries` route handler is V1-13, so every real submit currently ends in that Alert — verified). Register-interest and brochure forms open in `FormDialog` (portaled to body — an animated card ancestor would otherwise contain the fixed overlay — with focus trap, Escape close, focus return, body scroll lock; overlay click does not close, to protect typed input). Product preselect: demo select and quote chips take `?product=` only when eligible; `/upcoming?product=` auto-opens that product's dialog. Brochure button only renders when the catalog lists a brochure (verified by temporarily adding `pos.pdf`, then reverted; no catalog product has one until OV-16). Options in `content/form-options.ts` (OV-9/10/17 placeholders, ISO countries, BD first) with parity tests against the inquiry enums. Copy in `content/forms.ts`, `custom-software.ts`, `partners.ts`, `upcoming.ts` (OV-2). Browser-verified at 360/768/1280 (no horizontal scroll), keyboard-only through demo and interest forms (Tab skips the honeypot; radios arrow-navigate; summary links focus fields), and the brochure flow end-to-end against a mocked 201. New suites: `tests/inquiry.test.ts` (41) + `tests/source.test.ts` (5); frontend total 83, all green. Known environment note: the in-app browser view does not finish Next dev hydration for `useSearchParams` Suspense boundaries (also affects the existing /products page); verification ran in headless Chrome via CDP instead.
 | V1-25 | API: `brochure_download` and `partner` types (validator, eligibility, BR-3 for brochures) | US-13, US-14 | todo | `SubmitInquiryValidatorTests`, `SubmitInquiryHandlerTests` |
 | V1-26 | Sales notification: queue, MailKit sender, retries, `sales_notified_at` | US-15 | todo | `SubmitInquiryHandlerTests`, `SalesNotificationTests` |
 | V1-27 | CSV export endpoint with admin key and CSV-injection protection | US-16 | todo | `ExportInquiriesHandlerTests`, `CsvWriterTests` |

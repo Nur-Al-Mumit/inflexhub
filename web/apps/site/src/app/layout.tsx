@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "@/styles/tokens.css";
 import "@/styles/globals.css";
+import { SourceCapture } from "@/components/forms/SourceCapture";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { company } from "@/content/company";
@@ -40,6 +41,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <a className="skip-link" href="#main-content">
           Skip to main content
         </a>
+        {/* First-load UTM/referrer capture for form source tracking. */}
+        <SourceCapture />
         <Header categoryGroups={categoryGroups} />
         <main id="main-content">{children}</main>
         <Footer />

@@ -11,7 +11,8 @@ import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowUpRight, CheckCircle2, Download, Layers, Sparkles } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, Layers, Sparkles } from "lucide-react";
+import { BrochureButton } from "@/components/products/BrochureButton";
 import { CustomSoftwareTile } from "@/components/products/CustomSoftwareTile";
 import { ProductCard } from "@/components/products/ProductCard";
 import { productIcon } from "@/components/products/productIcons";
@@ -135,10 +136,15 @@ export default async function ProductPage({
           <>
             {actionButtons(true)}
             {product.brochure ? (
-              <ButtonLink href={`/brochures/${product.brochure}`} size="lg" variant="onDarkGhost">
-                <Download aria-hidden="true" size={16} />
-                Download brochure
-              </ButtonLink>
+              <BrochureButton
+                product={{
+                  slug: product.slug,
+                  name: product.name,
+                  availability: product.availability,
+                  brochure: product.brochure,
+                }}
+                brochure={product.brochure}
+              />
             ) : null}
           </>
         }

@@ -5,7 +5,7 @@
  * announces via aria-busy.
  */
 
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import type { ButtonHTMLAttributes, ReactNode, Ref } from "react";
 import { ArrowRight } from "lucide-react";
 import styles from "./Button.module.css";
 
@@ -24,6 +24,8 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   /** Trailing arrow on forward actions only (design-system §9). */
   arrow?: boolean;
   loading?: boolean;
+  /** React 19 ref-as-prop: dialog triggers keep a ref for focus return. */
+  ref?: Ref<HTMLButtonElement>;
   children: ReactNode;
 };
 
@@ -36,6 +38,7 @@ export function Button({
   className,
   children,
   type = "button",
+  ref,
   ...rest
 }: ButtonProps) {
   const classes = [
@@ -50,6 +53,7 @@ export function Button({
 
   return (
     <button
+      ref={ref}
       type={type}
       className={classes}
       disabled={disabled || loading}
