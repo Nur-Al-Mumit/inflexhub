@@ -1,0 +1,6 @@
+# InflexHub security contact (RFC 9116). V1-30; OV-20 placeholder address.
+Contact: mailto:security@inflexhub.com
+Expires: 2027-05-20T00:00:00.000Z
+Preferred-Languages: en, bn
+Canonical: https://inflexhub.com/.well-known/security.txt
+Policy: https://inflexhub.com/privacy

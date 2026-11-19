@@ -1,0 +1,17 @@
+{
+  "name": "InflexHub",
+  "short_name": "InflexHub",
+  "description": "Business software for companies, educational institutions, and healthcare organisations.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#141A4A",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

@@ -11,7 +11,9 @@
 import { NextResponse } from "next/server";
 import { clientIpFrom, forwardInquiry } from "@/lib/inquiries-forwarder";
 
-const MAX_BODY_BYTES = 64 * 1024;
+// docs/05-quality/security.md: 32 KB request body limit on the inquiry
+// endpoint (the formal limiter/rate limit is V1-19).
+const MAX_BODY_BYTES = 32 * 1024;
 
 export async function POST(request: Request): Promise<NextResponse> {
   const apiBaseUrl = process.env.API_BASE_URL;

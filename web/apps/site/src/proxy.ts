@@ -3,8 +3,8 @@
  * before rendering, so they answer with a real 404 status on the first request
  * (US-3). With Cache Components, `dynamicParams = false` is not available and
  * `notFound()` inside a streamed page cannot change a status already sent.
- * Security headers (V1-21) are set here for every response; the nonce-based
- * CSP and security.txt follow with V1-30.
+ * Security headers (V1-21) and the CSP (V1-30) are set here for every
+ * response.
  */
 
 import { NextResponse, type NextRequest } from "next/server";
@@ -13,18 +13,42 @@ import catalog from "../../../../catalog/products.json";
 const productSlugs = new Set(catalog.products.map((product) => product.slug));
 const industrySlugs = new Set(catalog.industries.map((industry) => industry.slug));
 
-// V1-21 (docs/05-quality/security.md "XSS, clickjacking, MIME sniffing").
-// HSTS joins in V1.1 with the production domain; CSP with a nonce is V1-30.
-const securityHeaders: Record<string, string> = {
-  "x-frame-options": "DENY",
-  "x-content-type-options": "nosniff",
-  "referrer-policy": "strict-origin-when-cross-origin",
-  "permissions-policy": "camera=(), microphone=(), geolocation=()",
-  "cross-origin-opener-policy": "same-origin",
-};
+// V1-21 + V1-30 (docs/05-quality/security.md "XSS, clickjacking, MIME sniffing").
+// HSTS joins in V1.1 with the production domain.
+//
+// CSP: nonce-based CSP requires dynamic rendering — Next.js docs state PPR
+// is incompatible with nonces ("static shell scripts won't have access to
+// the nonce"), and NFR-1 requires static generation. The static-compatible
+// policy keeps every directive strict except script-src/style-src
+// 'unsafe-inline' (documented in security.md); no third-party origins are
+// allowed anywhere.
+function contentSecurityPolicy(): string {
+  const isDev = process.env.NODE_ENV === "development";
+  return [
+    "default-src 'self'",
+    `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data: blob:",
+    "font-src 'self'",
+    "connect-src 'self'",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+    "frame-ancestors 'none'",
+    "upgrade-insecure-requests",
+  ].join("; ");
+}
 
 function withSecurityHeaders(response: NextResponse): NextResponse {
-  for (const [name, value] of Object.entries(securityHeaders)) {
+  response.headers.set("content-security-policy", contentSecurityPolicy());
+  const statics: Record<string, string> = {
+    "x-frame-options": "DENY",
+    "x-content-type-options": "nosniff",
+    "referrer-policy": "strict-origin-when-cross-origin",
+    "permissions-policy": "camera=(), microphone=(), geolocation=()",
+    "cross-origin-opener-policy": "same-origin",
+  };
+  for (const [name, value] of Object.entries(statics)) {
     response.headers.set(name, value);
   }
   return response;
