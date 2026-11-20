@@ -13,6 +13,8 @@ import { FieldContext } from "./FieldContext";
 import styles from "./Field.module.css";
 
 export type FieldProps = {
+  /** Stable id for the control; required when an error summary links to it. */
+  id?: string;
   label: string;
   /** Optional help text; replaced by the error when one is shown. */
   help?: string;
@@ -20,8 +22,8 @@ export type FieldProps = {
   children: ReactNode;
 };
 
-export function Field({ label, help, error, children }: FieldProps) {
-  const id = useId();
+export function Field({ id: fieldId, label, help, error, children }: FieldProps) {
+  const id = fieldId ?? useId();
   const helpId = `${id}-help`;
   const errorId = `${id}-error`;
   const showHelp = Boolean(help) && !error;

@@ -1,0 +1,12 @@
+/* FormRows (V1 forms): two fields side by side from 768 px, stacked below. */
+
+.row {
+  display: grid;
+  gap: var(--space-5);
+}
+
+@media (min-width: 768px) {
+  .row {
+    grid-template-columns: 1fr 1fr;
+  }
+}

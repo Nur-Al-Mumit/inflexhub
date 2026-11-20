@@ -56,6 +56,7 @@ Market: **Bangladesh first, built to international standards** (ADR 0005). Stack
 19. **Migrations never run at API startup.** They run as a separate step (`migrate` service or `dotnet ef database update`).
 20. **Commit only when the owner asks**, on a feature branch, conventional commit messages.
 21. **Bangladesh first, international standards** ([ADR 0005](../01-architecture/adr/0005-bangladesh-first-international-standards.md)): Bangladeshi defaults (BDT, +880, `BD`, Asia/Dhaka) with E.164 phones, ISO 3166-1 / ISO 4217 codes, UTC + ISO 8601 times, Unicode names, WCAG 2.2 AA, OWASP ASVS L1, GDPR-level privacy.
+22. **UI guidelines are absolute.** [ui-guidelines](../04-frontend/ui-guidelines.md) Part A (UI-1 – UI-12) overrides every other instruction for UI work, including role prompts and requests for a "modern" look. The owner's rule UI-1 forbids one-sided accent borders/stripes on any card or box. `web/apps/site/tests/ui-guidelines.test.ts` enforces the rules; an agent never weakens, skips, or deletes a check, and stops to ask the owner if a rule blocks the work.
 
 ## Conventions quick reference
 
@@ -67,6 +68,7 @@ Market: **Bangladesh first, built to international standards** (ADR 0005). Stack
 | REST | `/api/v1`, camelCase JSON, ProblemDetails with `traceId` | [api-spec](../02-backend/api-spec.md) |
 | Database | PostgreSQL 18, snake_case, `timestamptz` UTC, UUIDv7 ids | [schema](../03-database/schema.md) |
 | Frontend | Next.js 16 App Router, Server Components by default, catalog only via `src/lib/catalog.ts`, content in `src/content/` | [nextjs-architecture](../04-frontend/nextjs-architecture.md) |
+| **UI rules (absolute)** | Forbidden patterns, approved patterns, layout and review checklists | [ui-guidelines](../04-frontend/ui-guidelines.md) |
 | Visual design | Tokens, type scale, components, patterns | [design-system](../04-frontend/design-system.md) |
 | Pages | Route table and flows | [pages-and-flows](../04-frontend/pages-and-flows.md) |
 | Stories | Gherkin with `@v1`/`@ui`/`@open` tags | [user-stories](../00-product/user-stories.md) |
@@ -151,7 +153,7 @@ Starts with refining [scope/v2.md](../00-product/scope/v2.md) into stories, sche
 - [ ] No personal data in logs, test names, fixtures, or the diff.
 - [ ] No string-built SQL.
 - [ ] Migration: SQL script included; never runs at startup.
-- [ ] UI: tokens only, keyboard walk-through, 360 px and 1280 px checked, contrast AA, reduced motion respected.
+- [ ] UI: [ui-guidelines](../04-frontend/ui-guidelines.md) Part D checklist done (no side stripes, no invented proof, approved patterns only), `ui-guidelines.test.ts` green, tokens only, keyboard walk-through, 360 / 768 / 1280 px checked, contrast AA, reduced motion respected.
 - [ ] No invented company facts, numbers, testimonials, or logos.
 - [ ] Docs updated where behaviour or contracts changed; ADR for cross-cutting decisions.
 - [ ] Tracker row and summary counts updated.
@@ -193,7 +195,7 @@ Answers never live only in chat.
 | [docs/01-architecture/](../01-architecture/) | System and clean architecture, ADRs |
 | [docs/02-backend/](../02-backend/) | API spec + error catalog, coding standards |
 | [docs/03-database/](../03-database/) | Schema, indexes, demand views |
-| [docs/04-frontend/](../04-frontend/) | Design system, pages and flows, Next.js architecture |
+| [docs/04-frontend/](../04-frontend/) | **UI guidelines (absolute)**, design system, pages and flows, Next.js architecture |
 | [docs/05-quality/](../05-quality/) | Testing strategy, security |
 | [docs/06-devops/](../06-devops/) | Docker and environments |
 | [docs/agents/prompts/](prompts/) | Role prompts |

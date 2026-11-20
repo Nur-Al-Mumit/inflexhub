@@ -1,0 +1,74 @@
+/* InterestCard (V1-10): the ProductCard look with a button action. */
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  height: 100%;
+  padding: var(--space-6);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background-color: var(--surface);
+  box-shadow: var(--shadow-1);
+  transition:
+    border-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
+}
+
+.card:hover {
+  border-color: color-mix(in srgb, var(--orange-500) 45%, var(--line));
+  box-shadow: var(--shadow-2);
+  transform: translateY(-2px);
+}
+
+.card:has(button:focus-visible) {
+  outline: 3px solid var(--focus-color);
+  outline-offset: 2px;
+}
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background-color: var(--surface-tint);
+  color: var(--navy-800);
+  flex-shrink: 0;
+  transition:
+    background-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease);
+}
+
+.card:hover .icon {
+  background-color: var(--orange-50);
+  color: var(--orange-700);
+}
+
+.name {
+  font-size: var(--font-h3-size);
+  line-height: var(--font-h3-line-height);
+  font-weight: var(--font-h3-weight);
+  color: var(--ink);
+}
+
+.tagline {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
+  color: var(--muted);
+}
+
+.action {
+  margin-top: auto;
+  padding-top: var(--space-3);
+}

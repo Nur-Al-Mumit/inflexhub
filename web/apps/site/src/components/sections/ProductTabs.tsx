@@ -7,8 +7,7 @@
  */
 
 import { useRef, useState } from "react";
-import Link from "next/link";
-import { ArrowRight, Code2 } from "lucide-react";
+import { CustomSoftwareTile } from "@/components/products/CustomSoftwareTile";
 import { ProductCard } from "@/components/products/ProductCard";
 import type { ProductAvailability } from "@/lib/catalog";
 import { stagger } from "@/lib/motion";
@@ -112,24 +111,7 @@ export function ProductTabs({ categories }: { readonly categories: readonly TabC
                   </li>
                 ))}
                 <li style={stagger(category.products.length)}>
-                  <article className={styles.customTile}>
-                    <span className={styles.customIcon} aria-hidden="true">
-                      <Code2 size={22} />
-                    </span>
-                    <h3 className={styles.customTitle}>
-                      <Link href="/custom-software" className={styles.customLink}>
-                        Need something else?
-                      </Link>
-                    </h3>
-                    <p className={styles.customText}>
-                      InflexHub builds custom software around the way your
-                      organisation works.
-                    </p>
-                    <span className={styles.customMore} aria-hidden="true">
-                      Custom software
-                      <ArrowRight size={16} />
-                    </span>
-                  </article>
+                  <CustomSoftwareTile />
                 </li>
               </ul>
             ) : null}

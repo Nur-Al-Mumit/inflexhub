@@ -1,0 +1,7 @@
+/* Request a demo page (V1-8). */
+
+.loading {
+  font-size: var(--font-body-size);
+  color: var(--muted);
+  padding: var(--space-6) 0;
+}

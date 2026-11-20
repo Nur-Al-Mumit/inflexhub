@@ -1,0 +1,60 @@
+/* Custom software page (V1-7). */
+
+.buildCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  height: 100%;
+  padding: var(--space-6);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background-color: var(--surface);
+  box-shadow: var(--shadow-1);
+}
+
+.buildTitle {
+  font-size: var(--font-h3-size);
+  line-height: var(--font-h3-line-height);
+  font-weight: var(--font-h3-weight);
+}
+
+.buildText {
+  color: var(--muted);
+}
+
+.stackAside {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background-color: var(--surface);
+  box-shadow: var(--shadow-1);
+}
+
+.stackNote {
+  color: var(--text);
+}
+
+.techList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.techList li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  color: var(--text);
+}
+
+.techList svg {
+  flex-shrink: 0;
+  margin-top: var(--space-1);
+  color: var(--indigo-600);
+}

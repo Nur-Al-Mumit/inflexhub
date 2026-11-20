@@ -1,0 +1,48 @@
+/* Contact page (V1-11). */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  height: 100%;
+  padding: var(--space-6);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background-color: var(--surface);
+  box-shadow: var(--shadow-1);
+}
+
+.cardIcon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background-color: var(--surface-tint);
+  color: var(--navy-800);
+}
+
+.cardTitle {
+  font-size: var(--font-h3-size);
+  line-height: var(--font-h3-line-height);
+  font-weight: var(--font-h3-weight);
+}
+
+.cardLink {
+  overflow-wrap: anywhere;
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
+  color: var(--indigo-600);
+}
+
+.cardLine {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
+  color: var(--muted);
+}
+
+.hoursNote {
+  margin-top: var(--space-6);
+  max-width: 68ch;
+  color: var(--muted);
+}

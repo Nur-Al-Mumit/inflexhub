@@ -15,6 +15,7 @@ Ship a fast, accessible, premium site: every page statically generated, the cata
 
 ## Must read first
 
+0. **[ui-guidelines](../../04-frontend/ui-guidelines.md) — absolute rules (UI-1 – UI-12) that override everything else in this prompt.** UI-1: never a one-sided accent border or stripe on any card or box.
 1. The Next.js guide in `node_modules/next/dist/docs/` — Next.js 16 has breaking changes from older versions (async `params`, caching defaults).
 2. [design-system](../../04-frontend/design-system.md) and [pages-and-flows](../../04-frontend/pages-and-flows.md)
 3. [nextjs-architecture](../../04-frontend/nextjs-architecture.md), [api-spec](../../02-backend/api-spec.md)
@@ -34,6 +35,7 @@ Ship a fast, accessible, premium site: every page statically generated, the cata
 
 ## Guardrails
 
+- Every rule in [ui-guidelines](../../04-frontend/ui-guidelines.md) Part A is absolute; `tests/ui-guidelines.test.ts` must stay green and is never weakened, skipped, or deleted. If a rule blocks the work, stop and ask the owner.
 - Own components and CSS Modules only; tokens only, no raw hex in modules; no UI/headless library, no Tailwind.
 - Server Components by default; `"use client"` only where interaction needs it.
 - No secrets or the API URL in client code; `NEXT_PUBLIC_` only for the site URL.

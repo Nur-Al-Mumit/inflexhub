@@ -39,3 +39,14 @@
   color: var(--ink);
   font-weight: 500;
 }
+
+/* On navy surfaces (PageHero). */
+.onDark .item + .item::before,
+.onDark .link {
+  color: var(--on-dark-muted);
+}
+
+.onDark .link:hover,
+.onDark .current {
+  color: var(--on-dark);
+}

@@ -1,0 +1,50 @@
+/* WhatNext (V1 forms): steps beside a form, in the Section split aside. */
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.title {
+  font-size: var(--font-h4-size);
+  line-height: var(--font-h4-line-height);
+  font-weight: var(--font-h4-weight);
+}
+
+.intro {
+  color: var(--muted);
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.number {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  background-color: var(--surface-tint);
+  color: var(--indigo-600);
+  font-size: var(--font-small-size);
+  font-weight: 700;
+}
+
+.text {
+  padding-top: var(--space-1);
+  color: var(--text);
+}

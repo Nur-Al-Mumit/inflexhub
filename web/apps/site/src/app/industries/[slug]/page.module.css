@@ -1,0 +1,89 @@
+/* Industry detail (V1-6): page-specific pieces; sections style themselves. */
+
+.metaPill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid color-mix(in srgb, var(--on-dark) 25%, transparent);
+  border-radius: var(--radius-full);
+  font-size: var(--font-small-size);
+  font-weight: 600;
+  color: var(--on-dark);
+}
+
+.metaPill svg {
+  color: var(--orange-500);
+}
+
+.challenge {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  height: 100%;
+  padding: var(--space-6);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background-color: var(--surface);
+  box-shadow: var(--shadow-1);
+}
+
+.challengeIcon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background-color: var(--warning-surface);
+  color: var(--warning-text);
+}
+
+.challengeText {
+  font-size: var(--font-h4-size);
+  line-height: var(--font-h4-line-height);
+  font-weight: var(--font-h4-weight);
+  color: var(--ink);
+}
+
+.whyList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.whyCard {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background-color: var(--surface);
+  box-shadow: var(--shadow-1);
+}
+
+.whyIcon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  background-color: var(--success-surface);
+  color: var(--success-text);
+}
+
+.whyTitle {
+  margin-bottom: var(--space-2);
+  font-size: var(--font-h4-size);
+  line-height: var(--font-h4-line-height);
+  font-weight: var(--font-h4-weight);
+  color: var(--ink);
+}
+
+.whyText {
+  color: var(--muted);
+}

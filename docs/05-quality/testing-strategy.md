@@ -28,3 +28,4 @@ Integration tests against a real PostgreSQL are deferred until V2 (V1 has one wr
 | `filters.test.ts` | Category / industry / availability / search filters and URL round-trip |
 | `inquiry.test.ts` | Client validation matches API rules per type |
 | `a11y.test.ts` | axe-core: no serious/critical violations on key pages |
+| `ui-guidelines.test.ts` | Absolute UI rules (ui-guidelines Part A): no one-sided accent borders or stripes, no invented proof/filler, no raw colours, no gradient text, no emoji, approved dependencies only, no glassmorphism, no flashy motion, no style shortcuts |

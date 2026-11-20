@@ -1,0 +1,269 @@
+/* Product detail (V1-5): page-specific pieces; sections style themselves. */
+
+/* ---------- hero meta + at-a-glance card ---------- */
+
+.categoryPill {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid color-mix(in srgb, var(--on-dark) 25%, transparent);
+  border-radius: var(--radius-full);
+  font-size: var(--font-small-size);
+  font-weight: 600;
+  color: var(--on-dark);
+}
+
+.glance {
+  padding: var(--space-6);
+  border-radius: var(--radius-xl);
+  background-color: var(--surface);
+  box-shadow: var(--shadow-on-dark);
+}
+
+.glanceHead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-bottom: var(--space-4);
+  margin-bottom: var(--space-2);
+  border-bottom: 1px solid var(--line);
+}
+
+.glanceIcon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background-color: var(--orange-50);
+  color: var(--orange-700);
+}
+
+.glanceTitle {
+  font-size: var(--font-h4-size);
+  line-height: var(--font-h4-line-height);
+  font-weight: var(--font-h4-weight);
+  color: var(--ink);
+}
+
+.glanceList {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.glanceList > div {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: center;
+  padding-block: var(--space-3);
+}
+
+.glanceList > div + div {
+  border-top: 1px solid var(--line);
+}
+
+.glanceList dt {
+  font-size: var(--font-small-size);
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.glanceList dd {
+  margin: 0;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* ---------- overview: key features card ---------- */
+
+.featureCard {
+  padding: var(--space-7);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background-color: var(--surface);
+  box-shadow: var(--shadow-1);
+}
+
+.featureCardTitle {
+  margin-bottom: var(--space-4);
+  font-size: var(--font-overline-size);
+  letter-spacing: var(--font-overline-letter-spacing);
+  font-weight: var(--font-overline-weight);
+  text-transform: uppercase;
+  color: var(--orange-700);
+}
+
+.featureList {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.featureList li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding-block: var(--space-4);
+  font-size: var(--font-body-lg-size);
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.featureList li + li {
+  border-top: 1px solid var(--line);
+}
+
+.featureList svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--success-text);
+}
+
+/* ---------- modules ---------- */
+
+.moduleGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 640px) {
+  .moduleGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .moduleGrid {
+    grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr));
+  }
+}
+
+.module {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background-color: var(--surface);
+  box-shadow: var(--shadow-1);
+}
+
+.moduleHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.moduleIcon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background-color: var(--surface-tint);
+  color: var(--navy-800);
+}
+
+.moduleNumber {
+  font-size: var(--font-small-size);
+  font-weight: 800;
+  color: var(--border-input);
+  font-variant-numeric: tabular-nums;
+}
+
+.moduleName {
+  font-size: var(--font-h4-size);
+  line-height: var(--font-h4-line-height);
+  font-weight: var(--font-h4-weight);
+  color: var(--ink);
+}
+
+/* ---------- who it is for ---------- */
+
+.fit {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+}
+
+.industryLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.industryLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--touch-target-min);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-full);
+  background-color: var(--surface);
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  transition:
+    border-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease);
+}
+
+.industryLink:hover {
+  border-color: var(--orange-500);
+  color: var(--orange-700);
+}
+
+.industryLink:focus-visible {
+  outline: 3px solid var(--focus-color);
+  outline-offset: 2px;
+}
+
+.benefit {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  height: 100%;
+  padding: var(--space-6);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background-color: var(--surface);
+  box-shadow: var(--shadow-1);
+}
+
+.benefitIcon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background-color: var(--orange-50);
+  color: var(--orange-700);
+}
+
+.benefitText {
+  font-size: var(--font-h4-size);
+  line-height: var(--font-h4-line-height);
+  font-weight: var(--font-h4-weight);
+  color: var(--ink);
+}
+
+/* ---------- delivery ---------- */
+
+.deliveryActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}

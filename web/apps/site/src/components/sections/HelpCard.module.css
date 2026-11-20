@@ -1,6 +1,6 @@
-/* Home page (V1-3): only page-specific pieces; sections style themselves. */
+/* HelpCard (ui-guidelines Part B). */
 
-.faqAside {
+.card {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -12,7 +12,7 @@
   background-color: var(--surface);
 }
 
-.faqAsideIcon {
+.icon {
   display: grid;
   place-items: center;
   width: 40px;
@@ -23,18 +23,18 @@
   color: var(--orange-700);
 }
 
-.faqAsideTitle {
+.title {
   font-size: var(--font-h4-size);
   line-height: var(--font-h4-line-height);
   font-weight: var(--font-h4-weight);
   color: var(--ink);
 }
 
-.faqAsideText {
+.text {
   color: var(--muted);
 }
 
-.faqAsideLink {
+.link {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
@@ -45,7 +45,7 @@
   text-decoration: none;
 }
 
-.faqAsideLink:hover {
+.link:hover {
   text-decoration: underline;
   text-underline-offset: 4px;
 }

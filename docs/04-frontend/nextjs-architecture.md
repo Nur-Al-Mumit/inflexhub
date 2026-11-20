@@ -36,7 +36,7 @@ tests/                     node --test suites for lib/
 
 1. Server Components by default; client components only for header scroll/menu, filters, forms, interest dialog.
 2. The catalog is read only through `src/lib/catalog.ts` (V2 swaps it to the API).
-3. All product pages are statically generated; `dynamicParams = false` so unknown slugs give 404.
+3. Product and industry pages are statically generated with `generateStaticParams`. With Cache Components, `dynamicParams` is not available and `notFound()` inside a streamed page cannot change a status already sent, so `src/proxy.ts` rejects unknown slugs before rendering (real 404 on the first request); pages still call `notFound()` as a second guard.
 4. Forms post to `/api/inquiries`; the route handler forwards to `process.env.API_BASE_URL` with `X-Site-Key` from `process.env.SITE_API_KEY` (server-only env).
 5. Client validation mirrors the API rules in `src/lib/inquiry.ts`; the API remains the authority.
 6. Images: SVG components, no raster hero images. `next/font` for Plus Jakarta Sans.

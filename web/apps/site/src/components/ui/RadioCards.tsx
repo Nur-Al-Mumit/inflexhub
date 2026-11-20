@@ -4,7 +4,9 @@
  * RadioCards (V1-1): a fieldset of radio inputs styled as cards
  * (design-system §7 "radio cards"). Native radio semantics stay intact;
  * :has() drives the selected and focus styles. Reads the Field wrapper's
- * context for the invalid flag.
+ * context for the invalid flag; in forms, pass `id`/`aria-describedby`/
+ * `invalid` so the error summary can link to the fieldset (tabIndex -1 lets
+ * focus land on it).
  */
 
 import { useContext, type InputHTMLAttributes } from "react";
@@ -25,15 +27,32 @@ export type RadioCardsProps = Omit<
   legend: string;
   name: string;
   cards: readonly RadioCard[];
+  /** Stable id for the fieldset (error-summary links). */
+  id?: string;
+  /** Error text id, so screen readers announce it with the group. */
+  "aria-describedby"?: string;
+  invalid?: boolean;
 };
 
-export function RadioCards({ legend, name, cards, className, ...rest }: RadioCardsProps) {
+export function RadioCards({
+  legend,
+  name,
+  cards,
+  id,
+  "aria-describedby": ariaDescribedBy,
+  invalid = false,
+  className,
+  ...rest
+}: RadioCardsProps) {
   const field = useContext(FieldContext);
-  const isInvalid = field?.invalid ?? false;
+  const isInvalid = invalid || (field?.invalid ?? false);
 
   return (
     <fieldset
+      id={id}
+      aria-describedby={ariaDescribedBy}
       aria-invalid={isInvalid || undefined}
+      tabIndex={-1}
       className={[
         styles.fieldset,
         isInvalid ? styles.invalid : "",

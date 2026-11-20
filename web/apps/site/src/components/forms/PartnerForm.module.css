@@ -1,0 +1,19 @@
+/* PartnerForm (V1-24). */
+
+.regionBelow {
+  margin-top: var(--space-5);
+}
+
+.partnerTypeHelp {
+  font-size: var(--font-small-size);
+  line-height: var(--font-small-line-height);
+  color: var(--muted);
+  margin-top: calc(-1 * var(--space-3));
+}
+
+.partnerTypeError {
+  font-size: var(--font-small-size);
+  line-height: var(--font-small-line-height);
+  color: var(--danger-text);
+  margin-top: calc(-1 * var(--space-3));
+}

@@ -2,6 +2,8 @@
 
 Status: Draft
 PRD links: 1.2 (G1), 4 (NFR-1, NFR-2, NFR-4)
+> **Absolute UI rules live in [ui-guidelines](ui-guidelines.md) and override this document.** In particular UI-1: no one-sided accent borders or stripes on any card or box.
+
 Purpose: Principles, tokens, components, and patterns for the public site (V1) and the admin app (V2). Token values are implemented once in `web/apps/site/src/styles/tokens.css`. After that the code is the source and this table must match it.
 
 ## 1. Principles
@@ -84,7 +86,8 @@ Line length ≤ 68ch for paragraphs.
 | Spacing | `--space-1` 4 · 2 8 · 3 12 · 4 16 · 5 20 · 6 24 · 7 32 · 8 40 · 9 48 · 10 64 · 11 80 · 12 96 · 13 128 px |
 | Section padding | 112 px desktop · 80 tablet · 64 phone |
 | Radius | `--radius-sm` 8 (inputs, small buttons) · `--radius-md` 12 (buttons) · `--radius-lg` 20 (cards) · `--radius-xl` 28 (hero panels) · `--radius-full` |
-| Elevation | `--shadow-1` `0 1px 2px rgb(20 26 74 / .06), 0 2px 6px rgb(20 26 74 / .05)` · `--shadow-2` `0 8px 24px rgb(20 26 74 / .08)` · `--shadow-3` `0 24px 60px rgb(20 26 74 / .14)` |
+| Elevation | `--shadow-1` `0 1px 2px rgb(20 26 74 / .06), 0 2px 6px rgb(20 26 74 / .05)` · `--shadow-2` `0 8px 24px rgb(20 26 74 / .08)` · `--shadow-3` `0 24px 60px rgb(20 26 74 / .14)` · `--shadow-on-dark` `0 40px 80px rgb(0 0 0 / .45)` and `--shadow-on-dark-sm` `0 8px 18px rgb(0 0 0 / .35)` (only for elements floating on navy) |
+| Overlay | `--overlay` `rgb(8 12 38 / .5)` behind dialogs and the mobile drawer |
 | Container | max 1240 px, gutters 24 px (16 px under 400 px) |
 | Breakpoints | 640 · 900 · 1200 px; designed from 360 px |
 | Touch targets | ≥ 44 × 44 px |
@@ -162,3 +165,4 @@ Principles: motion explains structure (what appeared, what changed, where to loo
 | Empty states | Explain and offer a next step |
 | Numbers | Only factual (product count, industries count); never invented client counts |
 | Dark sections | Hero, CTA band, footer use `navy-950/900` with subtle grid and orange glow |
+| **No one-sided accent borders (owner rule)** | Never put a coloured or thick border on only one side of a card, panel, list item, quote or callout (no left/top "stripe", no inset-shadow stripe, no squared-off corners to make room for one). Cards use the full 1 px `--line` border, one radius on every corner and `--shadow-1`. Show state or emphasis with an icon tile, a badge or pill, a tinted surface, or a full border colour instead. Allowed: neutral 1 px `--line` dividers that separate regions (header bottom edge, stats-card cells, footer bar, drawer edge, menu footer) and component internals such as the spinner ring |

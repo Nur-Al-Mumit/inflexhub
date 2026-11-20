@@ -32,3 +32,10 @@
   color: var(--info-text);
   font-weight: 500;
 }
+
+/* Form state: full outline in the danger colour (never a one-sided stripe). */
+.invalidGroup {
+  padding: var(--space-2);
+  outline: 2px solid var(--danger-text);
+  border-radius: var(--radius-md);
+}

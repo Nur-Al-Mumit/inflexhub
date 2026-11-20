@@ -29,7 +29,13 @@ export function SectionHeader({
         .join(" ")}
     >
       {eyebrow ? <p className={styles.eyebrow}>{eyebrow}</p> : null}
-      <Tag className={styles.title}>{title}</Tag>
+      <Tag
+        className={[styles.title, level === 1 ? styles.titleH1 : ""]
+          .filter(Boolean)
+          .join(" ")}
+      >
+        {title}
+      </Tag>
       {intro ? <p className={styles.intro}>{intro}</p> : null}
     </div>
   );

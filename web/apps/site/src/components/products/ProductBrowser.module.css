@@ -1,0 +1,81 @@
+/* ProductBrowser (V1-4): filter bar, live count, grid, empty state. */
+
+.bar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background-color: var(--surface);
+  box-shadow: var(--shadow-1);
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-3) var(--space-3);
+  align-items: center;
+}
+
+.controlLabel {
+  font-size: var(--font-small-size);
+  font-weight: var(--font-small-weight);
+  line-height: var(--font-small-line-height);
+  color: var(--ink);
+}
+
+@media (min-width: 900px) {
+  .controls {
+    grid-template-columns: auto minmax(180px, 240px) auto minmax(180px, 1fr);
+    max-width: 720px;
+  }
+}
+
+.count {
+  margin: var(--space-6) 0 var(--space-4);
+  font-size: var(--font-small-size);
+  line-height: var(--font-small-line-height);
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Results re-animate softly whenever the filters change. */
+@media (prefers-reduced-motion: no-preference) {
+  .item {
+    animation: fade-up 420ms var(--ease) both;
+    animation-delay: calc(var(--i, 0) * 50ms);
+  }
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-9) var(--space-6);
+  border: 1px dashed var(--border-input);
+  border-radius: var(--radius-lg);
+  background-color: var(--surface-alt);
+}
+
+.emptyTitle {
+  margin: 0;
+  font-size: var(--font-h3-size);
+  line-height: var(--font-h3-line-height);
+  font-weight: var(--font-h3-weight);
+  color: var(--ink);
+}
+
+.emptyText {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
+  color: var(--text);
+  max-width: 56ch;
+}
+
+.emptyActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}

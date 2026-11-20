@@ -24,6 +24,7 @@ Short operating manual for anyone (human or AI) changing this repository, loaded
 8. Frontend: tokens and own components from the [design system](docs/04-frontend/design-system.md); no UI libraries; CSS Modules.
 9. Packages: only those in [ADR 0001](docs/01-architecture/adr/0001-stack.md); ask before adding any other.
 10. Bangladesh first, international standards ([ADR 0005](docs/01-architecture/adr/0005-bangladesh-first-international-standards.md)): BDT / +880 / `BD` / Asia/Dhaka defaults; E.164, ISO codes, UTC times, WCAG 2.2 AA, OWASP ASVS L1.
+11. **UI guidelines are absolute:** every UI change follows [docs/04-frontend/ui-guidelines.md](docs/04-frontend/ui-guidelines.md). Never: one-sided accent borders/stripes on cards, invented proof (testimonials, logos, client numbers), raw colours, gradient text, emoji icons, UI kits or animation libraries, glassmorphism, bouncy motion. `web/apps/site/tests/ui-guidelines.test.ts` enforces it; never weaken or skip it.
 
 ## Commands
 
@@ -40,4 +41,4 @@ Short operating manual for anyone (human or AI) changing this repository, loaded
 
 ## Definition of done
 
-Scope row implemented · listed tests exist and pass · Verify all green · docs and tracker updated · no personal data logged · keyboard and 360 px check for UI changes.
+Scope row implemented · UI guidelines respected (Part D checklist) · listed tests exist and pass · Verify all green · docs and tracker updated · no personal data logged · keyboard and 360 px check for UI changes.

@@ -26,6 +26,7 @@ Make sure every business rule is proven by a test, every form is protected from 
 - Review validators against the fields-per-type table; review handlers against BR-1 to BR-9.
 - Check rate limit, honeypot, site key, body limit, and security headers.
 - Scan diffs for personal data in logs, fixtures, and test names.
+- Review every UI diff against [ui-guidelines](../../04-frontend/ui-guidelines.md) Part D (UI-1 no side stripes, UI-2 no invented proof) and keep `ui-guidelines.test.ts` complete; a rule change needs the owner.
 - Run the manual `@ui` checklist before each release: keyboard-only, screen reader spot check, 360/768/1280 px, Lighthouse.
 
 ## Guardrails

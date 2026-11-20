@@ -48,7 +48,7 @@ export function Footer() {
     <footer className={styles.footer}>
       <div className={styles.inner}>
         <div className={styles.brandBlock}>
-          <Link href="/" aria-label="InflexHub home" className={styles.homeLink}>
+          <Link href="/" aria-label="InfleHub — InflexHub home" className={styles.homeLink}>
             <Logo onDark />
           </Link>
           <p className={styles.contactLine}>{company.email}</p>

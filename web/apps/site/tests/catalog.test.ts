@@ -12,6 +12,11 @@ import {
   getIndustrySummaries,
   getProductsByAvailability,
 } from "../src/lib/catalog.ts";
+import { productContent } from "../src/content/products/index.ts";
+import { industryContent } from "../src/content/industries.ts";
+import { existsSync, readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 test("getCategoryGroups_groups_every_product_under_its_category", () => {
   const groups = getCategoryGroups();
@@ -111,5 +116,56 @@ test("getIndustrySummaries_counts_products_per_industry", () => {
       summary.productCount > 0,
       `industry ${summary.slug} has no products in the catalog`,
     );
+  }
+});
+
+// --- V1-5: catalog ↔ content consistency (ADR 0002) ---
+
+test("every_catalog_slug_has_content_and_vice_versa", () => {
+  const catalogSlugs = getCatalog().products.map((p) => p.slug).sort();
+  const contentSlugs = Object.keys(productContent).sort();
+  assert.deepEqual(contentSlugs, catalogSlugs);
+});
+
+test("every_product_content_is_complete", () => {
+  for (const [slug, content] of Object.entries(productContent)) {
+    assert.ok(
+      content.overview.length > 0 && content.overview[0].length > 40,
+      `${slug}: overview missing or too thin`,
+    );
+    assert.ok(content.keyFeatures.length >= 4, `${slug}: too few key features`);
+    assert.ok(content.modules.length >= 3, `${slug}: too few modules`);
+    assert.ok(content.benefits.length >= 3, `${slug}: too few benefits`);
+    assert.ok(
+      content.howItWorks.length > 40,
+      `${slug}: howItWorks missing or too thin`,
+    );
+    assert.ok(content.faq.length >= 2, `${slug}: too few FAQ items`);
+  }
+});
+
+test("every_listed_brochure_file_exists", () => {
+  const siteDir = join(
+    dirname(fileURLToPath(import.meta.url)),
+    "..",
+  );
+  const brochures = getCatalog().products.filter((p) => p.brochure);
+  for (const product of brochures) {
+    const path = join(siteDir, "public", "brochures", product.brochure!);
+    assert.ok(
+      existsSync(path) && readFileSync(path).length > 0,
+      `${product.slug} lists brochure "${product.brochure}" but the file is missing`,
+    );
+  }
+});
+
+test("every_industry_slug_has_content_and_vice_versa", () => {
+  const catalogSlugs = getCatalog().industries.map((i) => i.slug).sort();
+  const contentSlugs = Object.keys(industryContent).sort();
+  assert.deepEqual(contentSlugs, catalogSlugs);
+  for (const [slug, content] of Object.entries(industryContent)) {
+    assert.ok(content.intro.length > 40, `${slug}: intro missing or too thin`);
+    assert.ok(content.challenges.length >= 3, `${slug}: too few challenges`);
+    assert.ok(content.why.length >= 2, `${slug}: too few why items`);
   }
 });
